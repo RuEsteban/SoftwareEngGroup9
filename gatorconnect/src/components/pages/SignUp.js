@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './SignUp.css'; 
+import {firebase} from "../..Firebase/firebase.js"
+import { addDoc,collection } from "@firebase/firestore"
 
 function SignUp() {
     const [formData, setFormData] = useState({
