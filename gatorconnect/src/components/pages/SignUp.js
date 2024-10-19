@@ -1,7 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './SignUp.css'; 
+import { signInWithGoogle, auth, } from './Firebase.js'
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
+
+
 
 function SignUp() {
+
+    const navigate = useNavigate();
+    const [isAuthenticaed, setIsAuthenticated] = useState(false);
+    const [user, setUser] = useState(null);
+
     const [formData, setFormData] = useState({
         username: '',
         email: '',
@@ -29,10 +39,54 @@ function SignUp() {
         console.log('Sign Up Successful:', formData);
     };
 
+    const handleGoogleSubmit = (e) => {
+        e.preventDefault();
+        signInWithGoogle();
+
+    }
+    const tempLogout = async () => {
+        const auth = getAuth();
+        try {
+            await signOut(auth);
+            
+        } catch (error){
+            console.error("error signout", error);
+        }
+    };
+
+    useEffect(() => {
+        const auth = getAuth(); 
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                
+                setIsAuthenticated(true);
+                setUser(user);
+                //navigate('/');
+            } else {
+           
+                setIsAuthenticated(false);
+                setUser(null);
+            }
+        });
+
+
+        return () => unsubscribe();
+    }, []);
+
     return (
         <div className='sign-up-container'>
             <form className='sign-up-form' onSubmit={handleSubmit}>
-                <h2>Sign Up</h2>
+                {isAuthenticaed ? (
+                    <div>
+                        <h2>
+                            {user?.displayName || user?.email}
+                        </h2>
+                        <img src = {user?.photoURL}></img>
+                    </div>
+                ): (
+                    <h2>Sign Up</h2>
+                )}
+               
                 <div className='form-group'>
                     <label htmlFor='username'>Username</label>
                     <input
@@ -77,7 +131,15 @@ function SignUp() {
                         required
                     />
                 </div>
-                <button type='submit' className='sign-up-button'>Sign Up</button>
+                <div className='form-group'>
+                    <button type='submit' className='sign-up-button'>Sign Up</button>
+                </div>
+                <div className='form-group'>
+                    <button onClick={handleGoogleSubmit} className='google-sign-up'> Sign In with Google</button>
+                </div>
+                <div className='form-group'>
+                    <button onClick={tempLogout} className='logout'> temp logout</button>
+                </div>
             </form>
         </div>
     );
