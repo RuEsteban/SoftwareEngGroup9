@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Button } from './Button';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
+import { user } from './/pages/SignUp.js'
+
 
 function Navbar() {
     const [click, setClick] = useState(false);
@@ -61,7 +63,7 @@ function Navbar() {
                     {button && <Button buttonStyle='btn--outline'>SIGN UP</Button>}
                     <Link to='/profile' className='profile-icon'>
                         <img
-                            src='images/profileicon.png'
+                            src={localStorage.profilepic}
                             alt='Profile'
                             className='profile-icon-img'
                         />
