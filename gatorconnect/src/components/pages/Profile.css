@@ -1,0 +1,199 @@
+/* General Page Styling */
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: #f9f9f9;
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.profile-content {
+    flex: 0 0 300px;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    position: sticky;
+    top: 120px;
+    height: fit-content;
+}
+
+.profile-card {
+    text-align: center;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+.username {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.email {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.profile-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profile-button {
+    background-color: #1f98f4;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .profile-button:hover {
+        background-color: #006bb3;
+    }
+
+.listings-content {
+    flex: 1;
+    padding: 20px;
+}
+
+.cards__container {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    max-width: 1120px;
+    width: 100%;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cards__wrapper {
+    position: relative;
+    margin-top: 20px;
+}
+
+.cards__items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Creates three columns */
+    gap: 20px; /* Space between each card */
+    margin-bottom: 24px;
+}
+
+.cards__item {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 6px 20px rgba(56, 125, 255, 0.17);
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+}
+
+.cards__item__link {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-decoration: none;
+}
+
+.cards__item__pic-wrap {
+    position: relative;
+    width: 100%;
+    padding-top: 67%;
+    overflow: hidden;
+}
+
+    .cards__item__pic-wrap::after {
+        content: attr(data-category);
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 6px 8px;
+        max-width: calc(100% - 60px);
+        font-size: 12px;
+        font-weight: 700;
+        color: #fff;
+        background-color: #1f98f4;
+        box-sizing: border-box;
+        border-bottom-left-radius: 5px; /* Round the bottom left corner */
+    }
+
+.cards__item__img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.2s ease-in-out;
+}
+
+    .cards__item__img:hover {
+        transform: scale(1.05);
+    }
+
+.cards__item__info {
+    padding: 20px;
+}
+
+.cards__item__text {
+    font-size: 18px;
+    color: #252e48;
+    margin-bottom: 10px;
+}
+
+.cards__item__details {
+    display: flex;
+    justify-content: space-between; /* Align rating and distance side by side */
+    font-size: 14px;
+    color: #555;
+    margin-top: 10px;
+}
+
+.cards__item__rating {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #333;
+}
+
+    .cards__item__rating span {
+        color: gold; /* For the rating text */
+        font-weight: bold;
+    }
+
+.cards__item__distance {
+    font-size: 14px;
+    color: #666; /* Color for distance text */
+}
+
+.footer {
+    margin-top: auto;
+    padding: 10px;
+    background-color: #1f98f4;
+    color: white;
+    text-align: center;
+}
