@@ -47,11 +47,13 @@ const ListingDetail = () => {
 
     return (
         <div className="listing-detail">
-            <h2>{listing.title}</h2>
             <img src={listing.image} alt={listing.title} />
-            <p>{listing.description}</p>
-            <p>Rating: ⭐ {listing.rating}</p>
-            <p>Distance: {listing.distance}</p>
+            <div className="listing-detail-content">
+                <h2>{listing.title}</h2>
+                <p>{listing.description}</p>
+                <p className="rating">Rating: ⭐ {listing.rating}</p>
+                <p>Distance: {listing.distance}</p>
+            </div>
         </div>
     );
 };

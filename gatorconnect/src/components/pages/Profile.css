@@ -197,3 +197,57 @@
     color: white;
     text-align: center;
 }
+.listing-detail {
+    display: flex; /* Use flexbox to create a side-by-side layout */
+    align-items: center; /* Center items vertically */
+    max-width: 800px;
+    margin: 0 auto; /* Center the content horizontally */
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background for contrast */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+}
+
+    .listing-detail img {
+        width: 40%; /* Make the image take up less space */
+        height: auto;
+        border-radius: 8px;
+        margin-right: 20px; /* Space between the image and the text */
+    }
+
+.listing-detail-content {
+    flex: 1; /* Allow the content to fill the remaining space */
+}
+
+.listing-detail h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #333; /* Darker text for better readability */
+}
+
+.listing-detail p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 8px; /* Consistent spacing */
+}
+
+.listing-detail .rating {
+    font-weight: bold;
+    color: #ff9800; /* Color for the star rating */
+}
+
+@media (max-width: 768px) {
+    .listing-detail {
+        flex-direction: column; /* Stack image and content on small screens */
+        padding: 15px;
+    }
+
+        .listing-detail img {
+            width: 100%; /* Image takes full width on smaller screens */
+            margin-bottom: 15px; /* Add space between image and content when stacked */
+        }
+
+        .listing-detail h2 {
+            font-size: 1.5rem;
+        }
+}
