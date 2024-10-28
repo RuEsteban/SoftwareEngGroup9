@@ -7,8 +7,7 @@ import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 function Profile() {
     const username = "JohnDoe";
     const email = "johndoe@example.com";
-    const profilePicture = "https://via.placeholder.com/150"; // Placeholder image
-
+    const profilePicture = "https://via.placeholder.com/150"; 
     const handleChangePassword = () => {
         console.log('Navigating to Change Password...');
     };
@@ -17,7 +16,6 @@ function Profile() {
         console.log('Navigating to Payment Setup...');
     };
 
-    // Sample data for listings with rating and distance
     const listings = [
         {
             id: 1,

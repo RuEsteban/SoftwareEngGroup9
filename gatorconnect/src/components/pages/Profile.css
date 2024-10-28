@@ -1,11 +1,9 @@
-
-/* General Page Styling */
 .page-container {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     background: #f9f9f9;
-    padding-top: 0px; /* Adjust this value to match the height of your navbar */
+    padding-top: 0px;
 }
 
 .profile-container {
@@ -97,8 +95,8 @@
 
 .cards__items {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Creates three columns */
-    gap: 20px; /* Space between each card */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
     margin-bottom: 24px;
 }
 
@@ -138,7 +136,7 @@
         color: #fff;
         background-color: #1f98f4;
         box-sizing: border-box;
-        border-bottom-left-radius: 5px; /* Round the bottom left corner */
+        border-bottom-left-radius: 5px;
     }
 
 .cards__item__img {
@@ -162,7 +160,7 @@
 }
 
 .cards__item__text {
-    font-size: 22px; /* Title font size */
+    font-size: 22px;
     color: #252e48;
     margin-bottom: 10px;
 }
@@ -170,27 +168,26 @@
 .cards__item__details {
     display: flex;
     justify-content: space-between;
-    align-items: center; /* Align items vertically centered */
+    align-items: center;
     font-size: 14px;
     color: #555;
     margin-top: 10px;
 }
 
-/* Hide the description */
 .cards__item__description {
-    display: none; /* Ensure description is not shown */
+    display: none;
 }
 
 .cards__item__cost {
     font-size: 14px;
     color: #333;
     display: flex;
-    align-items: center; /* Center dollar signs vertically */
+    align-items: center;
 }
 
     .cards__item__cost i {
-        margin-right: 2px; /* Add some space between dollar signs */
-        color: #1f98f4; /* Dollar signs color */
+        margin-right: 2px;
+        color: #1f98f4;
     }
 
 .cards__item__rating {
@@ -201,13 +198,13 @@
 }
 
     .cards__item__rating span {
-        color: gold; /* For the rating text */
+        color: gold;
         font-weight: bold;
     }
 
 .cards__item__distance {
     font-size: 14px;
-    color: #666; /* Color for distance text */
+    color: #666;
 }
 
 .footer {
@@ -219,20 +216,18 @@
 }
 
 .listing-title {
-    font-size: 4rem; /* Adjust size as needed */
-    font-weight: bold; /* Makes the title stand out */
-    margin-bottom: 10px; /* Space between the title and the next element */
-    color: #222; /* Darker color for better readability */
+    font-size: 4rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #222;
 }
 
 .listing-description {
-    margin-top: 10px; /* Space above the description */
-    font-size: 1.5rem; /* Font size for the description */
-    color: #333; /* Dark color for readability */
-    line-height: 1.5; /* Line height for better spacing */
+    margin-top: 10px;
+    font-size: 1.5rem;
+    color: #333;
+    line-height: 1.5;
 }
-
-
 
 .listing-detail {
     max-width: 800px;
@@ -247,14 +242,14 @@
         width: 100%;
         height: 300px;
         object-fit: cover;
-        border-radius: 10px 10px 0 0; /* Rounded top corners */
+        border-radius: 10px 10px 0 0;
     }
 
 .listing-detail-content {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Space between elements */
+    gap: 10px;
 }
 
 .listing-detail-header {
@@ -273,74 +268,72 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Space between each detail */
+    gap: 10px;
 }
 
 .listing-detail-container {
     display: flex;
-    flex-direction: column; /* Stack elements vertically */
-    align-items: flex-start; /* Align items to the left */
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .image-container {
-    position: relative; /* Allows absolute positioning for the button */
+    position: relative;
 }
 
     .image-container img {
-        width: 100%; /* Ensure the image takes full width of the container */
-        height: auto; /* Keep the aspect ratio */
+        width: 100%;
+        height: auto;
     }
 
 .book-button {
-    background-color: #007bff; /* Blue background color */
-    color: white; /* White text color */
-    border: none; /* No border */
-    padding: 15px 30px; /* Larger padding for a bigger button */
-    font-size: 1.2rem; /* Larger font size */
-    font-weight: bold; /* Bold text */
-    cursor: pointer; /* Pointer cursor on hover */
-    position: absolute; /* Position the button relative to its parent */
-    bottom: 10px; /* Space from the bottom */
-    right: 10px; /* Space from the right */
-    border-radius: 5px; /* Rounded corners */
-    z-index: 10; /* Ensure the button is above other elements */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    border-radius: 5px;
+    z-index: 10;
 }
 
     .book-button:hover {
-        background-color: #0056b3; /* Darker blue on hover */
+        background-color: #0056b3;
     }
 
-
 .cost {
-    font-size: 1rem; /* Slightly larger for emphasis */
+    font-size: 1rem;
     font-weight: bold;
-    color: #333; /* Darker color for better readability */
-    margin-bottom: 5px; /* Adds space below the cost */
+    color: #333;
+    margin-bottom: 5px;
 }
 
 .rating {
-    font-size: 1rem; /* Keeps the rating slightly smaller */
-    color: #ffcc00; /* A yellowish color to represent stars */
+    font-size: 1rem;
+    color: #ffcc00;
     margin-bottom: 5px;
 }
 
 .distance {
     font-size: 1rem;
-    color: #666; /* Lighter gray to differentiate from cost */
+    color: #666;
     margin-bottom: 5px;
-    font-style: italic; /* Gives a different style for emphasis */
+    font-style: italic;
 }
-
 
 @media (max-width: 768px) {
     .listing-detail {
-        flex-direction: column; /* Stack image and content on small screens */
+        flex-direction: column;
         padding: 15px;
     }
 
         .listing-detail img {
-            width: 100%; /* Image takes full width on smaller screens */
-            margin-bottom: 15px; /* Add space between image and content when stacked */
+            width: 100%;
+            margin-bottom: 15px;
         }
 
         .listing-detail h2 {
@@ -357,12 +350,10 @@
     display: flex;
     gap: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    position: sticky; /* Keeps it at the top while scrolling */
-    top: 60px; /* This should match the height of your navbar */
-    z-index: 100; /* Ensure it stays above other elements */
+    position: sticky;
+    top: 60px;
+    z-index: 100;
 }
-
-
 
 .filter-input,
 .filter-slider {
@@ -378,15 +369,15 @@
     .filter-slider:focus {
         border-color: #007bff;
         box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
-
     }
+
 .filter-slider {
     -webkit-appearance: none;
     appearance: none;
     width: 150px;
     background: #e0e0e0;
     border-radius: 5px;
-    height: 5px; /* Match the track height to the thumb's center */
+    height: 5px;
     outline: none;
     transition: background 0.3s ease-in-out;
     cursor: pointer;
@@ -395,79 +386,31 @@
     .filter-slider::-webkit-slider-thumb {
         -webkit-appearance: none;
         appearance: none;
-        width: 16px;
-        height: 16px;
+        width: 14px;
+        height: 14px;
         background: #007bff;
         border-radius: 50%;
         cursor: pointer;
-        transition: background 0.3s ease-in-out;
-        margin-top: -1px; /* Adjust the margin to center the thumb vertically */
     }
 
     .filter-slider::-moz-range-thumb {
-        width: 16px;
-        height: 16px;
+        width: 14px;
+        height: 14px;
         background: #007bff;
         border-radius: 50%;
         cursor: pointer;
-        transition: background 0.3s ease-in-out;
     }
 
-.save-button {
-    background-color: #007bff;
+.filter-button {
+    padding: 10px 20px;
+    background: #1f98f4;
     color: white;
+    font-weight: bold;
+    border-radius: 6px;
     border: none;
-    border-radius: 5px;
-    padding: 10px 15px;
     cursor: pointer;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    transition: background-color 0.3s ease;
-    margin-bottom: 20px;
 }
 
-    .save-button:hover {
-        background-color: #0056b3;
+    .filter-button:hover {
+        background: #006bb3;
     }
-
-    .save-button i {
-        font-size: 1.2rem;
-    }
-
-@media (max-width: 600px) {
-    .listing-detail {
-        padding: 15px;
-    }
-
-        .listing-detail h2 {
-            font-size: 1.5rem;
-        }
-
-    .listing-detail-info {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .save-button {
-        align-self: flex-start;
-    }
-}
-
-.image-container {
-    width: 100%;
-    height: 300px; /* Fixed height */
-    background-color: #000; /* Black background for bars */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden; /* Hide overflow to avoid showing excess image */
-}
-
-    .image-container img {
-        height: 300px; /* Force the image to have a height of 300px */
-        width: auto; /* Maintain the aspect ratio */
-        object-fit: cover; /* Scale the image to cover the container */
-    }
-

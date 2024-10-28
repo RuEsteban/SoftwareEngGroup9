@@ -10,13 +10,14 @@ import Team from './components/pages/Team.js';
 import Mission from './components/pages/Mission.js';
 import Profile from './components/pages/Profile.js';
 import ListingDetail from './components/pages/ListingDetails';
+import Login from './components/pages/Login';
 
 function App() {
     return (
         <>
             <Router>
                 <Navbar />
-                <div className="page-container"> {/* Add this div to wrap content */}
+                <div className="page-container"> {}
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='/services' element={<Services />} />
@@ -26,7 +27,8 @@ function App() {
                     <Route path='/mission' element={<Mission />} />
                     <Route path='/profile' element={<Profile />} />
                     <Route path='/listing/:id' element={<ListingDetail />} />
-                    </Routes>
+                    <Route path='/login' element={<Login />} />
+                </Routes>
                 </div>
             </Router>
         </>

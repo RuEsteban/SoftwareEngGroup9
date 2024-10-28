@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import './SignUp.css'; 
-import { signInWithGoogle, auth, } from './Firebase.js'
+import './SignUp.css';
+import { signInWithGoogle, auth } from './Firebase.js';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 
-
-
 function SignUp() {
-
     const navigate = useNavigate();
     const [isAuthenticaed, setIsAuthenticated] = useState(false);
     const [user, setUser] = useState(null);
@@ -34,42 +31,34 @@ function SignUp() {
             alert('Passwords do not match!');
             return;
         }
-
-        // Handle sign-up logic, such as sending data to a backend
         console.log('Sign Up Successful:', formData);
     };
 
     const handleGoogleSubmit = (e) => {
         e.preventDefault();
         signInWithGoogle();
+    };
 
-    }
     const tempLogout = async () => {
         const auth = getAuth();
         try {
             await signOut(auth);
-            
-        } catch (error){
+        } catch (error) {
             console.error("error signout", error);
         }
     };
 
     useEffect(() => {
-        const auth = getAuth(); 
+        const auth = getAuth();
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
-                
                 setIsAuthenticated(true);
                 setUser(user);
-                //navigate('/');
             } else {
-           
                 setIsAuthenticated(false);
                 setUser(null);
             }
         });
-
-
         return () => unsubscribe();
     }, []);
 
@@ -78,15 +67,13 @@ function SignUp() {
             <form className='sign-up-form' onSubmit={handleSubmit}>
                 {isAuthenticaed ? (
                     <div>
-                        <h2>
-                            {user?.displayName || user?.email}
-                        </h2>
-                        <img src = {user?.photoURL}></img>
+                        <h2>{user?.displayName || user?.email}</h2>
+                        <img src={user?.photoURL} alt="User" />
                     </div>
-                ): (
+                ) : (
                     <h2>Sign Up</h2>
                 )}
-               
+
                 <div className='form-group'>
                     <label htmlFor='username'>Username</label>
                     <input
@@ -139,6 +126,9 @@ function SignUp() {
                 </div>
                 <div className='form-group'>
                     <button onClick={tempLogout} className='logout'> temp logout</button>
+                </div>
+                <div className='form-group'>
+                    <p>Already have an account? <span onClick={() => navigate('/login')} className='login-link'>Log In</span></p>
                 </div>
             </form>
         </div>
