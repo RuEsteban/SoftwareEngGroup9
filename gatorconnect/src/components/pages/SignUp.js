@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './SignUp.css'; 
-import { signInWithGoogle, auth, } from './Firebase.js'
+import { signInWithGoogle, auth, signUpWithEmail, } from './Firebase.js'
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 
@@ -37,6 +37,7 @@ function SignUp() {
 
         // Handle sign-up logic, such as sending data to a backend
         console.log('Sign Up Successful:', formData);
+        signUpWithEmail(email, password);
     };
 
     const handleGoogleSubmit = (e) => {
@@ -47,6 +48,7 @@ function SignUp() {
     const tempLogout = async () => {
         const auth = getAuth();
         try {
+            console.clear();
             await signOut(auth);
             
         } catch (error){
