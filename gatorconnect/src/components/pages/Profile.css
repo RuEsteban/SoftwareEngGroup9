@@ -1,9 +1,11 @@
+
 /* General Page Styling */
 .page-container {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     background: #f9f9f9;
+    padding-top: 0px; /* Adjust this value to match the height of your navbar */
 }
 
 .profile-container {
@@ -160,18 +162,36 @@
 }
 
 .cards__item__text {
-    font-size: 18px;
+    font-size: 22px; /* Title font size */
     color: #252e48;
     margin-bottom: 10px;
 }
 
 .cards__item__details {
     display: flex;
-    justify-content: space-between; /* Align rating and distance side by side */
+    justify-content: space-between;
+    align-items: center; /* Align items vertically centered */
     font-size: 14px;
     color: #555;
     margin-top: 10px;
 }
+
+/* Hide the description */
+.cards__item__description {
+    display: none; /* Ensure description is not shown */
+}
+
+.cards__item__cost {
+    font-size: 14px;
+    color: #333;
+    display: flex;
+    align-items: center; /* Center dollar signs vertically */
+}
+
+    .cards__item__cost i {
+        margin-right: 2px; /* Add some space between dollar signs */
+        color: #1f98f4; /* Dollar signs color */
+    }
 
 .cards__item__rating {
     display: flex;
@@ -197,44 +217,120 @@
     color: white;
     text-align: center;
 }
+
+.listing-title {
+    font-size: 4rem; /* Adjust size as needed */
+    font-weight: bold; /* Makes the title stand out */
+    margin-bottom: 10px; /* Space between the title and the next element */
+    color: #222; /* Darker color for better readability */
+}
+
+.listing-description {
+    margin-top: 10px; /* Space above the description */
+    font-size: 1.5rem; /* Font size for the description */
+    color: #333; /* Dark color for readability */
+    line-height: 1.5; /* Line height for better spacing */
+}
+
+
+
 .listing-detail {
-    display: flex; /* Use flexbox to create a side-by-side layout */
-    align-items: center; /* Center items vertically */
     max-width: 800px;
-    margin: 0 auto; /* Center the content horizontally */
+    margin: 20px auto;
     padding: 20px;
-    background-color: #f9f9f9; /* Light background for contrast */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
     .listing-detail img {
-        width: 40%; /* Make the image take up less space */
-        height: auto;
-        border-radius: 8px;
-        margin-right: 20px; /* Space between the image and the text */
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 10px 10px 0 0; /* Rounded top corners */
     }
 
 .listing-detail-content {
-    flex: 1; /* Allow the content to fill the remaining space */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between elements */
+}
+
+.listing-detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .listing-detail h2 {
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-    color: #333; /* Darker text for better readability */
+    font-size: 2rem;
+    color: #333;
+    margin: 0;
 }
 
-.listing-detail p {
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 8px; /* Consistent spacing */
+.listing-detail-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between each detail */
 }
 
-.listing-detail .rating {
+.listing-detail-container {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: flex-start; /* Align items to the left */
+}
+
+.image-container {
+    position: relative; /* Allows absolute positioning for the button */
+}
+
+    .image-container img {
+        width: 100%; /* Ensure the image takes full width of the container */
+        height: auto; /* Keep the aspect ratio */
+    }
+
+.book-button {
+    background-color: #007bff; /* Blue background color */
+    color: white; /* White text color */
+    border: none; /* No border */
+    padding: 15px 30px; /* Larger padding for a bigger button */
+    font-size: 1.2rem; /* Larger font size */
+    font-weight: bold; /* Bold text */
+    cursor: pointer; /* Pointer cursor on hover */
+    position: absolute; /* Position the button relative to its parent */
+    bottom: 10px; /* Space from the bottom */
+    right: 10px; /* Space from the right */
+    border-radius: 5px; /* Rounded corners */
+    z-index: 10; /* Ensure the button is above other elements */
+}
+
+    .book-button:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+    }
+
+
+.cost {
+    font-size: 1rem; /* Slightly larger for emphasis */
     font-weight: bold;
-    color: #ff9800; /* Color for the star rating */
+    color: #333; /* Darker color for better readability */
+    margin-bottom: 5px; /* Adds space below the cost */
 }
+
+.rating {
+    font-size: 1rem; /* Keeps the rating slightly smaller */
+    color: #ffcc00; /* A yellowish color to represent stars */
+    margin-bottom: 5px;
+}
+
+.distance {
+    font-size: 1rem;
+    color: #666; /* Lighter gray to differentiate from cost */
+    margin-bottom: 5px;
+    font-style: italic; /* Gives a different style for emphasis */
+}
+
 
 @media (max-width: 768px) {
     .listing-detail {
@@ -251,3 +347,127 @@
             font-size: 1.5rem;
         }
 }
+
+.filter-section {
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 40px;
+    margin-bottom: 20px;
+    margin-top: 0px;
+    display: flex;
+    gap: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky; /* Keeps it at the top while scrolling */
+    top: 60px; /* This should match the height of your navbar */
+    z-index: 100; /* Ensure it stays above other elements */
+}
+
+
+
+.filter-input,
+.filter-slider {
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease-in-out;
+}
+
+    .filter-input:focus,
+    .filter-slider:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+
+    }
+.filter-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 150px;
+    background: #e0e0e0;
+    border-radius: 5px;
+    height: 5px; /* Match the track height to the thumb's center */
+    outline: none;
+    transition: background 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+    .filter-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        background: #007bff;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background 0.3s ease-in-out;
+        margin-top: -1px; /* Adjust the margin to center the thumb vertically */
+    }
+
+    .filter-slider::-moz-range-thumb {
+        width: 16px;
+        height: 16px;
+        background: #007bff;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background 0.3s ease-in-out;
+    }
+
+.save-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+}
+
+    .save-button:hover {
+        background-color: #0056b3;
+    }
+
+    .save-button i {
+        font-size: 1.2rem;
+    }
+
+@media (max-width: 600px) {
+    .listing-detail {
+        padding: 15px;
+    }
+
+        .listing-detail h2 {
+            font-size: 1.5rem;
+        }
+
+    .listing-detail-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .save-button {
+        align-self: flex-start;
+    }
+}
+
+.image-container {
+    width: 100%;
+    height: 300px; /* Fixed height */
+    background-color: #000; /* Black background for bars */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Hide overflow to avoid showing excess image */
+}
+
+    .image-container img {
+        height: 300px; /* Force the image to have a height of 300px */
+        width: auto; /* Maintain the aspect ratio */
+        object-fit: cover; /* Scale the image to cover the container */
+    }
+

@@ -16,6 +16,7 @@ function App() {
         <>
             <Router>
                 <Navbar />
+                <div className="page-container"> {/* Add this div to wrap content */}
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='/services' element={<Services />} />
@@ -25,7 +26,8 @@ function App() {
                     <Route path='/mission' element={<Mission />} />
                     <Route path='/profile' element={<Profile />} />
                     <Route path='/listing/:id' element={<ListingDetail />} />
-                </Routes>
+                    </Routes>
+                </div>
             </Router>
         </>
     );
