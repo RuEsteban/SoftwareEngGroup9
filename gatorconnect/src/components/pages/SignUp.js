@@ -48,7 +48,10 @@ function SignUp() {
     const tempLogout = async () => {
         const auth = getAuth();
         try {
-            console.clear();
+            console.removeItem("name");
+            console.removeItem("email");
+            console.removeItem("profilepic");
+
             await signOut(auth);
             
         } catch (error){

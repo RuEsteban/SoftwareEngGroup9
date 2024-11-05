@@ -46,7 +46,7 @@ export const signUpWithEmail = (email, password) => {
 
         localStorage.setItem("name", user);
         localStorage.setItem("email", email);
-        localStorage.setItem("profilePic", profilepic);
+        //localStorage.setItem("profilePic", profilepic);
 
 
     }).catch((error)=> {
