@@ -9,6 +9,8 @@ import SignUp from './components/pages/SignUp.js';
 import Team from './components/pages/Team.js';
 import Mission from './components/pages/Mission.js';
 import Profile from './components/pages/Profile.js';
+import AddPostPage from './components/pages/AddPostPage.js';
+import ListingDetail from './components/pages/ListingDetails';
 
 function App() {
     return (
@@ -23,6 +25,8 @@ function App() {
                     <Route path='/team' element={<Team />} />
                     <Route path='/mission' element={<Mission />} />
                     <Route path='/profile' element={<Profile />} />
+                    <Route path='/add-post' element= {<AddPostPage/>} />
+                    <Route path='/listing/:id' element={<ListingDetail />} />
                 </Routes>
             </Router>
         </>
