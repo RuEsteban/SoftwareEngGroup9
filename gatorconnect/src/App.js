@@ -17,6 +17,7 @@ function App() {
         <>
             <Router>
                 <Navbar />
+                <div className="page-container"> {/* Add this div to wrap content */}
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='/services' element={<Services />} />
@@ -27,7 +28,8 @@ function App() {
                     <Route path='/profile' element={<Profile />} />
                     <Route path='/add-post' element= {<AddPostPage/>} />
                     <Route path='/listing/:id' element={<ListingDetail />} />
-                </Routes>
+                    </Routes>
+                </div>
             </Router>
         </>
     );
