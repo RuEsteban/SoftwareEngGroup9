@@ -11,6 +11,7 @@ import Mission from './components/pages/Mission.js';
 import Profile from './components/pages/Profile.js';
 import ListingDetail from './components/pages/ListingDetails';
 import Login from './components/pages/Login';
+import Messaging from './components/pages/Messaging';
 
 function App() {
     return (
@@ -28,6 +29,7 @@ function App() {
                     <Route path='/profile' element={<Profile />} />
                     <Route path='/listing/:id' element={<ListingDetail />} />
                     <Route path='/login' element={<Login />} />
+                    <Route path='/messages' element={<Messaging />} />
                 </Routes>
                 </div>
             </Router>

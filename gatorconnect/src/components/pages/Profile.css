@@ -414,3 +414,20 @@
     .filter-button:hover {
         background: #006bb3;
     }
+
+.messaging-button {
+    margin-top: 20px;
+    padding: 12px 24px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    align-self: flex-end;
+    transition: background-color 0.3s;
+}
+
+    .messaging-button:hover {
+        background-color: #0056b3;
+    }
