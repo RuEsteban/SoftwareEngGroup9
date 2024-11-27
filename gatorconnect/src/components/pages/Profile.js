@@ -1,8 +1,14 @@
-﻿import React from 'react';
+﻿import React, {useState, useEffect} from 'react';
 import './Profile.css';
 import Footer from '../Footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
+
+import {collection, addDoc, getDocs, doc, QuerySnapshot, deleteDoc} from 'firebase/firestore'
+import {db} from './Firebase'
+
+import { useNavigate } from 'react-router-dom';
+
 
 function Profile() {
     const username = "JohnDoe";
@@ -18,7 +24,7 @@ function Profile() {
     };
 
     // Sample data for listings with rating and distance
-    const listings = [
+    const hardlistings = [
         {
             id: 1,
             title: "Cozy Apartment in Downtown",
@@ -52,6 +58,52 @@ function Profile() {
             distance: "1 mile away"
         },
     ];
+
+    // State to store listings
+    const [listings, setListings] = useState(hardlistings);
+
+    // Fetch Firestore data
+    useEffect(() => {
+        const fetchListings = async () => {
+            try {
+                const querySnapshot = await getDocs(collection(db, 'userData')); 
+                const fetchedListings = querySnapshot.docs.map((doc, index) => {
+                    const data = doc.data();
+                    return {
+                        id: doc.id, // Assign an incremental ID for each listing
+                        title: data.PostName || 'Untitled Listing',
+                        description: data.PostCaption || 'No description available.',
+                        image: data.image || 'https://via.placeholder.com/300', // Default image if none provided
+                        rating: data.rating || 5, // Default rating
+                        distance: data.Location || 'Unknown location',
+                    };
+                });
+
+                setListings((prevListings) => [...prevListings, ...fetchedListings]); // Update state with fetched listings
+            } catch (error) {
+                console.error('Error fetching listings: ', error);
+            }
+        };
+
+        fetchListings();
+    }, []);
+
+    const deleteListing = async (id) => {
+        try{
+            const docRef = doc(db, 'userData', id);
+            await deleteDoc(docRef);
+            setListings((prevListings) => prevListings.filter((listing) => listing.id !== id));
+        }
+        catch(error){
+            console.error("Error deleting listing: ", error);
+        }
+    };
+
+    const navigate = useNavigate();
+    const toEditPage = (id) => {
+        navigate(`/edit-listing/${id}`);
+    };
+
 
     return (
         <div className="page-container">
@@ -99,6 +151,18 @@ function Profile() {
                                                 </div>
                                             </div>
                                         </a>
+                                        <button
+                                            className='delete-button'
+                                            onClick={() => deleteListing(listing.id)}
+                                        >
+                                            Delete
+                                        </button>
+                                        <button
+                                            className='edit-button'
+                                            onClick={() => toEditPage(listing.id)}
+                                        >
+                                            Edit
+                                        </button>
                                     </li>
                                 ))}
                             </ul>

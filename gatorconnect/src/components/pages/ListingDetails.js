@@ -1,8 +1,11 @@
-﻿import React from 'react';
+﻿import React, {useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import './Profile.css'; // Import the CSS for styling
 
-const listings = [
+import {collection, addDoc, getDocs, doc, QuerySnapshot} from 'firebase/firestore'
+import {db} from './Firebase'
+
+const hardlistings = [
     {
         id: 1,
         title: "Cozy Apartment in Downtown",
@@ -38,8 +41,38 @@ const listings = [
 ];
 
 const ListingDetail = () => {
+    // State to store listings
+    const [listings, setListings] = useState(hardlistings);
+
+    // Fetch Firestore data
+    useEffect(() => {
+        const fetchListings = async () => {
+            try {
+                const querySnapshot = await getDocs(collection(db, 'userData')); 
+                const fetchedListings = querySnapshot.docs.map((doc) => {
+                    const data = doc.data();
+                    return {
+                        id: doc.id, // Assign an incremental ID for each listing
+                        title: data.PostName || 'Untitled Listing',
+                        description: data.PostCaption || 'No description available.',
+                        image: data.image || 'https://via.placeholder.com/300', // Default image if none provided
+                        rating: data.rating || 5, // Default rating
+                        distance: data.Location || 'Unknown location',
+                    };
+                });
+
+                setListings((prevListings) => [...prevListings, ...fetchedListings]); // Update state with fetched listings
+            } catch (error) {
+                console.error('Error fetching listings: ', error);
+            }
+        };
+
+        fetchListings();
+    }, []); 
+
+
     const { id } = useParams();
-    const listing = listings.find((listing) => listing.id === parseInt(id));
+    const listing = listings.find((listing) => listing.id === id);
 
     if (!listing) {
         return <div>Listing not found!</div>;

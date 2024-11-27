@@ -1,10 +1,15 @@
-﻿import React from 'react';
+﻿import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import './Profile.css'; // Import the CSS for styling
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
-const listings = [
+
+import {collection, addDoc, getDocs, doc, QuerySnapshot} from 'firebase/firestore'
+import {db} from './Firebase'
+
+
+export const hardlistings = [
     {
         id: 1,
         title: "Cozy Apartment in Downtown",
@@ -37,10 +42,40 @@ const listings = [
         rating: 4.6,
         distance: "1 mile away"
     },
+
     // Add more listings as needed
 ];
 
 const ListingsPage = () => {
+    // State to store listings
+    const [listings, setListings] = useState(hardlistings);
+
+    // Fetch Firestore data
+    useEffect(() => {
+        const fetchListings = async () => {
+            try {
+                const querySnapshot = await getDocs(collection(db, 'userData')); 
+                const fetchedListings = querySnapshot.docs.map((doc) => {
+                    const data = doc.data();
+                    return {
+                        id: doc.id, // Assign an incremental ID for each listing
+                        title: data.PostName || 'Untitled Listing',
+                        description: data.PostCaption || 'No description available.',
+                        image: data.image || 'https://via.placeholder.com/300', // Default image if none provided
+                        rating: data.rating || 5, // Default rating
+                        distance: data.Location || 'Unknown location',
+                    };
+                });
+
+                setListings((prevListings) => [...prevListings, ...fetchedListings]); // Update state with fetched listings
+            } catch (error) {
+                console.error('Error fetching listings: ', error);
+            }
+        };
+
+        fetchListings();
+    }, []); 
+
     return (
         <div className="listings-content">
             <div className="cards__container">

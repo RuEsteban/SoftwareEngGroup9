@@ -1,74 +1,84 @@
-import React, { useState } from 'react';
-import '../../App.css';
-import './AddPost.css';
-import Footer from '../Footer';
-import axios from 'axios';
-import {collection, addDoc, getDocs, doc} from 'firebase/firestore'
-import {db} from './Firebase'
-import {listings} from './Services';
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { db } from './Firebase';
+import './EditListing.css';
 
+function EditListing() {
+    const { id } = useParams(); // Get listing ID from the URL
+    const navigate = useNavigate();
 
+    const [listing, setListing] = useState({
+        BusinessName: '',
+        Cost: '',
+        Email: '',
+        Location: '',
+        Phone: '',
+        PostCaption: '',
+        PostName: '',
+    });
 
+    // Fetch listing data
+    useEffect(() => {
+        const fetchListing = async () => {
+            try {
+                const docRef = doc(db, 'userData', id);
+                const docSnap = await getDoc(docRef);
 
-const AddPostPage = () => {
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    setListing({
+                        BusinessName: data.BusinessName || '',
+                        Cost: data.Cost || '',
+                        Email: data.Email || '',
+                        Location: data.Location || '',
+                        Phone: data.Phone || '',
+                        PostCaption: data.PostCaption || '',
+                        PostName: data.PostName || '',
+                    });
+                } else {
+                    console.error('Listing not found!');
+                }
+            } catch (error) {
+                console.error('Error fetching listing: ', error);
+            }
+        };
 
-    const[postName, setPostName] = useState()
-    const[postCaption, setCaption] = useState()
-    const[cost, setCost] = useState()
-    const[location, setLocation] = useState()
-    const[businessName, setBusinessName] = useState()
-    const[email, setEmail] = useState()
-    const[phone, setPhone] = useState()
+        fetchListing();
+    }, [id]);
 
-    //https://www.filestack.com/fileschool/react/react-file-upload/
+    // Handle input changes
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setListing((prevListing) => ({ ...prevListing, [name]: value }));
+    };
 
-    // const [file, setFile] = useState()
-    // const [uploadedFileURL, setUploadedFileURL] = useState(null)
-
-    const dbref = collection(db, "userData")
-
-    const send = async () =>
-    {
-        try
-        {
-            await addDoc(dbref, {PostName:postName, PostCaption:postCaption, Cost:cost, Location:location, BusinessName: businessName, Email:email, Phone:phone})
-            alert("Post Sent Successfully")
+    // Save changes to Firestore
+    const handleSave = async () => {
+        try {
+            const docRef = doc(db, 'userData', id);
+            await updateDoc(docRef, {
+                BusinessName: listing.BusinessName,
+                Cost: listing.Cost,
+                Email: listing.Email,
+                Location: listing.Location,
+                Phone: listing.Phone,
+                PostCaption: listing.PostCaption,
+                PostName: listing.PostName,
+            });
+            console.log('Listing updated successfully!');
+            navigate('/profile'); // Navigate back to the Profile page
+        } catch (error) {
+            console.error('Error updating listing: ', error);
         }
-        catch(error)
-        {
-            alert("Error while sending the post")
-        }
-    }
-
-    // function handleChange(event) {
-    //     setFile(event.target.files[0])
-    // }
-    
-    // function handleSubmit(event) {
-    //     event.preventDefault()
-    //     const url = 'http://localhost:3000/add-post';
-    //     const formData = new FormData();
-    //     formData.append('file', file);
-    //     formData.append('fileName', file.name);
-    //     const config = {
-    //     headers: {
-    //         'content-type': 'multipart/form-data',
-    //         },
-    //     };
-    //     axios.post(url, formData, config).then((response) => {
-    //         setFile(event.target.files[0]);
-    //         //setUploadedFileURL(response/data/fileUrl);
-    //     });
-
-    // }
-
+    };
 
     return (
         <section className='page'>
             <div className='container'>
                 <div className='box'>
                     <form>
-                        <h2 className='addPostTxt'>Add Post</h2>
+                        <h2 className='addPostTxt'>Edit Post</h2>
                         <div className='space'>
                             <label className='title'>
                                 Post Name
@@ -76,12 +86,12 @@ const AddPostPage = () => {
                             <input
                                 type='text'
                                 id='title'
-                                name='title'
+                                name='PostName'
                                 className='text'
                                 placeholder='eg. Pottery Class'
                                 required
-                                value={postName}
-                                onChange={(e) => setPostName(e.target.value)}
+                                value={listing.PostName}
+                                onChange={handleChange}
                             />
                         </div>
                         <div className='space'>
@@ -93,12 +103,12 @@ const AddPostPage = () => {
                             </label>
                             <textarea
                                 id='description'
-                                name='description'
+                                name='PostCaption'
                                 className='text'
                                 rows='4'
                                 placeholder='Add any job duties, expectations, requirements, etc'
-                                value={postCaption}
-                                onChange={(e) => setCaption(e.target.value)}
+                                value={listing.PostCaption}
+                                onChange={handleChange}
                             ></textarea>
                         </div>
                         <div className='space'>
@@ -110,11 +120,11 @@ const AddPostPage = () => {
                             </label>
                             <select
                                 id='salary'
-                                name='salary'
+                                name='Cost'
                                 className='text'
                                 required
-                                value={cost}
-                                onChange={(e) => setCost(e.target.value)}
+                                value={listing.Cost}
+                                onChange={handleChange}
                             >
                                 <option value='Under $10'>Under $10</option>
                                 <option value='$10 - 20'>$10 - $20</option>
@@ -135,13 +145,13 @@ const AddPostPage = () => {
                             </label>
                             <input
                                 type='text'
-                                id='location'
-                                name='location'
+                                id='Location'
+                                name='Location'
                                 className='text'
                                 placeholder='Activity Location'
                                 required
-                                value={location}
-                                onChange={(e) => setLocation(e.target.value)}
+                                value={listing.Location}
+                                onChange={handleChange}
                             />
                         </div>
                         <div className='space'>
@@ -154,11 +164,11 @@ const AddPostPage = () => {
                             <input
                                 type='text'
                                 id='company'
-                                name='company'
+                                name='BusinessName'
                                 className='text'
                                 placeholder='Company Name'
-                                value={businessName}
-                                onChange={(e) => setBusinessName(e.target.value)}
+                                value={listing.BusinessName}
+                                onChange={handleChange}
                             />
                         </div>
                         <div className='space'>
@@ -169,14 +179,14 @@ const AddPostPage = () => {
                                 Contact Email
                             </label>
                             <input
-                                type='email'
+                                type='Email'
                                 id='contact_email'
-                                name='contact_email'
+                                name='Email'
                                 className='text'
                                 placeholder='Email address for customers'
                                 required
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                value={listing.Email}
+                                onChange={handleChange}
                             />
                         </div>
                         <div className='space'>
@@ -189,11 +199,11 @@ const AddPostPage = () => {
                             <input
                                 type='tel'
                                 id='contact_phone'
-                                name='contact_phone'
+                                name='Phone'
                                 className='text'
-                                placeholder='Optional phone for customers'
-                                value={phone}
-                                onChange={(e) => setPhone(e.target.value)}
+                                placeholder='Optional Phone for customers'
+                                value={listing.Phone}
+                                onChange={handleChange}
                             />
                         </div>
                         {/* <form className='space'onSubmit={handleSubmit}>
@@ -205,10 +215,10 @@ const AddPostPage = () => {
                         <div>
                             <button
                                 className='post-button'
-                                type='submit'
-                                onClick={send}
+                                type='button'
+                                onClick={handleSave}
                             >
-                                Add Post
+                                Save Changes
                             </button>
                         </div>
                     </form>
@@ -216,6 +226,6 @@ const AddPostPage = () => {
             </div>
         </section>
     );
-};
+}
 
-export default AddPostPage;
+export default EditListing;
