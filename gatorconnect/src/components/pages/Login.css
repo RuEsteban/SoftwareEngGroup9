@@ -65,3 +65,8 @@
         color: #0056b3;
         text-decoration: none;
     }
+.no-account {
+    color: #ff0000;
+    cursor: pointer;
+    
+}

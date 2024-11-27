@@ -3,14 +3,17 @@ import { Button } from './Button';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 import { user } from './/pages/SignUp.js'
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 
 
 function Navbar() {
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
-
+    const [user, setUser] = useState(null);
+    const [isAuthenticaed, setIsAuthenticated] = useState(false);
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
+    const auth = getAuth();
 
     const showButton = () => {
         if (window.innerWidth <= 960) {
@@ -19,13 +22,33 @@ function Navbar() {
             setButton(true);
         }
     };
-
+    const tempLogout = async () => {
+        const auth = getAuth();
+        try {
+            await signOut(auth);
+        } catch (error) {
+            console.error("error signout", error);
+        }
+    };
     useEffect(() => {
         showButton();
     }, []);
 
     window.addEventListener('resize', showButton);
 
+    useEffect(() => {
+        const auth = getAuth();
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setIsAuthenticated(true);
+                setUser(user);
+            } else {
+                setIsAuthenticated(false);
+                setUser(null);
+            }
+        });
+        return () => unsubscribe();
+    }, [auth]);
     return (
         <>
             <nav className='navbar'>
@@ -59,15 +82,26 @@ function Navbar() {
                                 Sign Up
                             </Link>
                         </li>
+                        
                     </ul>
-                    {button && <Button buttonStyle='btn--outline'>SIGN UP</Button>}
+                    {user ? ( 
+                        <>
+                        <Button buttonStyle='btn--outline' onClick={tempLogout}>SIGN OUT</Button>
+
+                        </>
+                    ) : (
+                        <>
+                        {button && <Button buttonStyle='btn--outline'>SIGN UP</Button>}
+                        </>
+                    )}
                     <Link to='/profile' className='profile-icon'>
                         <img
-                            src={localStorage.profilepic}
+                            src={user?.photoURL}
                             alt='Profile'
                             className='profile-icon-img'
                         />
                     </Link>
+                    
                 </div>
             </nav>
         </>

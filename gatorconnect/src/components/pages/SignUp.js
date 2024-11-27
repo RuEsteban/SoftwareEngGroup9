@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import './SignUp.css';
-import { signInWithGoogle, auth } from './Firebase.js';
+import { signInWithGoogle} from './Firebase.js';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
-import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, signOut, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+
+
 
 function SignUp() {
     const navigate = useNavigate();
     const [isAuthenticaed, setIsAuthenticated] = useState(false);
     const [user, setUser] = useState(null);
-
+    const googleProvider = new GoogleAuthProvider();
+    const auth = getAuth();
     const [formData, setFormData] = useState({
         username: '',
         email: '',
@@ -36,9 +39,30 @@ function SignUp() {
 
     const handleGoogleSubmit = (e) => {
         e.preventDefault();
-        signInWithGoogle();
+        signInWithPopup(auth, googleProvider)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            setUser({
+                displayName: user.displayName,
+                email: user.email,
+                photoURL: user.photoURL,
+            });
+        })
     };
 
+    const handleEmailSubmit = (e) => {
+        e.preventDefault();
+        const auth = getAuth();
+        createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            const email = userCredential.email;
+            const profilePic = userCredential.photoURL;
+        })
+        .catch((error) => {
+            const errorCode = error.errorCode
+        })
+    }
     const tempLogout = async () => {
         const auth = getAuth();
         try {
@@ -60,11 +84,12 @@ function SignUp() {
             }
         });
         return () => unsubscribe();
-    }, []);
+    }, [auth]);
 
     return (
         <div className='sign-up-container'>
             <form className='sign-up-form' onSubmit={handleSubmit}>
+                
                 {isAuthenticaed ? (
                     <div>
                         <h2>{user?.displayName || user?.email}</h2>
@@ -119,16 +144,17 @@ function SignUp() {
                     />
                 </div>
                 <div className='form-group'>
-                    <button type='submit' className='sign-up-button'>Sign Up</button>
+                    <button onClick={handleEmailSubmit} type='submit' className='sign-up-button'>Sign Up</button>
                 </div>
                 <div className='form-group'>
                     <button onClick={handleGoogleSubmit} className='google-sign-up'> Sign In with Google</button>
                 </div>
-                <div className='form-group'>
-                    <button onClick={tempLogout} className='logout'> temp logout</button>
-                </div>
+                
                 <div className='form-group'>
                     <p>Already have an account? <span onClick={() => navigate('/login')} className='login-link'>Log In</span></p>
+                </div>
+                <div className='form-group'>
+                    <button onClick={tempLogout} type='submit' className='sign-up-button'>TEMP LOGOUT</button>
                 </div>
             </form>
         </div>
