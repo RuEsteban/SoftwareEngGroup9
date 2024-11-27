@@ -48,11 +48,12 @@ function SignUp() {
     const tempLogout = async () => {
         const auth = getAuth();
         try {
-            console.removeItem("name");
-            console.removeItem("email");
-            console.removeItem("profilepic");
-
             await signOut(auth);
+
+            localStorage.removeItem("name");
+            localStorage.removeItem("email");
+            localStorage.removeItem("profilepic");
+
             
         } catch (error){
             console.error("error signout", error);
@@ -84,9 +85,8 @@ function SignUp() {
                 {isAuthenticaed ? (
                     <div>
                         <h2>
-                            {user?.displayName || user?.email}
+                            Welcome {user?.displayName}!
                         </h2>
-                        <img src = {user?.photoURL}></img>
                     </div>
                 ): (
                     <h2>Sign Up</h2>
