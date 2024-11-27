@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Login.css';
 import { useNavigate } from 'react-router-dom';
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { getAuth, updateProfile, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
 function Login() {
     const googleProvider = new GoogleAuthProvider();
@@ -34,6 +34,7 @@ function Login() {
                 email: user.email,
                 photoURL: user.photoURL,
             });
+            
         })
         .catch((error) => {
             setIsNotUser(true);
@@ -64,11 +65,6 @@ function Login() {
         <div className='login-container'>
             <form className='login-form'>
             
-                <div>
-                    <h2>{user?.displayName || user?.email}</h2>
-                    <img src={user?.photoURL}  />
-                </div>
-                
                 <h2>Login</h2>
                 <div className='form-group'>
                     <label htmlFor='identifier'>Email or Username</label>
@@ -103,7 +99,7 @@ function Login() {
                 </div>
                 {isNotUser ? (
                     <div>
-                        <p className = 'no-account'>No account found, please sign up</p>
+                        <p className = 'no-account'>Username or password is incorrect</p>
                     </div>
                 ) : (
                     <h2></h2>

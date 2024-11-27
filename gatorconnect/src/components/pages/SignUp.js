@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './SignUp.css';
 import { signInWithGoogle} from './Firebase.js';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
-import { getAuth, onAuthStateChanged, signOut, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { getAuth, sendEmailVerification, updateProfile, onAuthStateChanged, signOut, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 
 
@@ -38,6 +38,7 @@ function SignUp() {
     };
 
     const handleGoogleSubmit = (e) => {
+        const auth = getAuth();
         e.preventDefault();
         signInWithPopup(auth, googleProvider)
         .then((userCredential) => {
@@ -47,17 +48,28 @@ function SignUp() {
                 email: user.email,
                 photoURL: user.photoURL,
             });
+        }) 
+        .catch((error) => {
+            const errorCode = error.errorCode
         })
     };
 
     const handleEmailSubmit = (e) => {
         e.preventDefault();
+        if (password !== confirmPassword) {
+            alert('Passwords do not match!');
+            return;
+        }
         const auth = getAuth();
+        
         createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            const user = userCredential.user;
-            const email = userCredential.email;
-            const profilePic = userCredential.photoURL;
+            updateProfile(auth.currentUser, {
+                displayName: username,
+                email: email,
+                password: password,
+            })
+            
         })
         .catch((error) => {
             const errorCode = error.errorCode
@@ -89,16 +101,7 @@ function SignUp() {
     return (
         <div className='sign-up-container'>
             <form className='sign-up-form' onSubmit={handleSubmit}>
-                
-                {isAuthenticaed ? (
-                    <div>
-                        <h2>{user?.displayName || user?.email}</h2>
-                        <img src={user?.photoURL} alt="User" />
-                    </div>
-                ) : (
-                    <h2>Sign Up</h2>
-                )}
-
+            
                 <div className='form-group'>
                     <label htmlFor='username'>Username</label>
                     <input

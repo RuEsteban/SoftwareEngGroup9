@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom';
 import './Navbar.css';
 import { user } from './/pages/SignUp.js'
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 
 
 function Navbar() {
+    const navigate = useNavigate();
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
     const [user, setUser] = useState(null);
@@ -22,10 +24,18 @@ function Navbar() {
             setButton(true);
         }
     };
+
+    const navSignUp = (e) => {
+        e.preventDefault();
+        navigate('/sign-up')
+
+    }
+
     const tempLogout = async () => {
         const auth = getAuth();
         try {
             await signOut(auth);
+            navigate('/sign-up')
         } catch (error) {
             console.error("error signout", error);
         }
@@ -91,7 +101,7 @@ function Navbar() {
                         </>
                     ) : (
                         <>
-                        {button && <Button buttonStyle='btn--outline'>SIGN UP</Button>}
+                        {button && <Button onClick={navSignUp} buttonStyle='btn--outline'>SIGN UP</Button>}
                         </>
                     )}
                     <Link to='/profile' className='profile-icon'>

@@ -1,17 +1,24 @@
-﻿import React from 'react';
-import { useNavigate } from 'react-router-dom';
+﻿import React, { useState, useEffect } from 'react';
+import { useBeforeUnload, useNavigate, useSearchParams } from 'react-router-dom';
 import './Profile.css';
 import Footer from '../Footer';
+import {getAuth, onAuthStateChanged} from 'firebase/auth';
 
 function Profile() {
     const navigate = useNavigate();
+    const [user, setUser] = useState(null);
+    const [isAuthenticaed, setIsAuthenticated] = useState(false);
+    const auth = getAuth();
 
     const username = "JohnDoe";
     const email = "johndoe@example.com";
     const profilePicture = "https://via.placeholder.com/150";
 
+
     const handleChangePassword = () => {
         console.log('Navigating to Change Password...');
+        navigate('/changePassword');
+
     };
 
     const handleSetupPayment = () => {
@@ -29,14 +36,30 @@ function Profile() {
         { id: 4, title: "City Loft", description: "Stylish loft in the heart of the city, close to everything.", image: "https://via.placeholder.com/300", rating: 4.6, distance: "1 mile away" },
     ];
 
+   
+    useEffect(() => {
+        const auth = getAuth();
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if(user) {
+                setIsAuthenticated(true);
+                setUser(user);
+            }else {
+                setIsAuthenticated(false);
+                setUser(null);
+            }
+        });
+        return () => unsubscribe();
+    } ,[auth]);
+
+  
     return (
         <div className="page-container">
             <div className="profile-container">
                 <div className="profile-content">
                     <div className="profile-card">
-                        <img src={profilePicture} alt="Profile" className="profile-picture" />
-                        <h2 className="username">{username}</h2>
-                        <p className="email">{email}</p>
+                        <img src={user?.photoURL} alt="Profile" className="profile-picture" />
+                        <h2 className="username">{user?.displayName}</h2>
+                        <p className="email">{user?.email}</p>
                         <div className="profile-buttons">
                             <button onClick={handleChangePassword} className="profile-button">Change Password</button>
                             <button onClick={handleSetupPayment} className="profile-button">Set Up Payment</button>

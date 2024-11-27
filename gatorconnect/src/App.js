@@ -12,6 +12,7 @@ import Profile from './components/pages/Profile.js';
 import ListingDetail from './components/pages/ListingDetails';
 import Login from './components/pages/Login';
 import Messaging from './components/pages/Messaging';
+import ChangePass from './components/pages/ChangePass'
 
 function App() {
     return (
@@ -30,6 +31,7 @@ function App() {
                     <Route path='/listing/:id' element={<ListingDetail />} />
                     <Route path='/login' element={<Login />} />
                     <Route path='/messages' element={<Messaging />} />
+                    <Route path='/changePassword' element={<ChangePass />}/>
                 </Routes>
                 </div>
             </Router>
