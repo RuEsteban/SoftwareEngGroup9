@@ -1,8 +1,13 @@
-﻿import React, { useState, useEffect } from 'react';
 import { useBeforeUnload, useNavigate, useSearchParams } from 'react-router-dom';
+﻿import React, {useState, useEffect} from 'react';
 import './Profile.css';
 import Footer from '../Footer';
 import {getAuth, onAuthStateChanged} from 'firebase/auth';
+
+import {collection, addDoc, getDocs, doc, QuerySnapshot, deleteDoc} from 'firebase/firestore'
+import {db} from './Firebase'
+
+
 
 function Profile() {
     const navigate = useNavigate();
@@ -28,13 +33,7 @@ function Profile() {
         navigate('/messages');
     };
 
-    const listings = [
-        { id: 1, title: "Cozy Apartment in Downtown", description: "A lovely 2-bedroom apartment with modern amenities.", image: "https://via.placeholder.com/300", rating: 4.5, distance: "2 miles away" },
-        { id: 2, title: "Beachside Villa", description: "Enjoy ocean views and a private pool in this beautiful villa.", image: "https://via.placeholder.com/300", rating: 4.7, distance: "5 miles away" },
-        { id: 3, title: "Mountain Cabin", description: "Perfect for a quiet retreat with stunning mountain views.", image: "https://via.placeholder.com/300", rating: 4.9, distance: "20 miles away" },
-        { id: 4, title: "City Loft", description: "Stylish loft in the heart of the city, close to everything.", image: "https://via.placeholder.com/300", rating: 4.6, distance: "1 mile away" },
-    ];
-
+   
    
     useEffect(() => {
         const auth = getAuth();
@@ -51,6 +50,87 @@ function Profile() {
     } ,[auth]);
 
   
+    // Sample data for listings with rating and distance
+    const hardlistings = [
+        {
+            id: 1,
+            title: "Cozy Apartment in Downtown",
+            description: "A lovely 2-bedroom apartment with modern amenities.",
+            image: "https://via.placeholder.com/300",
+            rating: 4.5,
+            distance: "2 miles away"
+        },
+        {
+            id: 2,
+            title: "Beachside Villa",
+            description: "Enjoy ocean views and a private pool in this beautiful villa.",
+            image: "https://via.placeholder.com/300",
+            rating: 4.7,
+            distance: "5 miles away"
+        },
+        {
+            id: 3,
+            title: "Mountain Cabin",
+            description: "Perfect for a quiet retreat with stunning mountain views.",
+            image: "https://via.placeholder.com/300",
+            rating: 4.9,
+            distance: "20 miles away"
+        },
+        {
+            id: 4,
+            title: "City Loft",
+            description: "Stylish loft in the heart of the city, close to everything.",
+            image: "https://via.placeholder.com/300",
+            rating: 4.6,
+            distance: "1 mile away"
+        },
+    ];
+
+    // State to store listings
+    const [listings, setListings] = useState(hardlistings);
+
+    // Fetch Firestore data
+    useEffect(() => {
+        const fetchListings = async () => {
+            try {
+                const querySnapshot = await getDocs(collection(db, 'userData')); 
+                const fetchedListings = querySnapshot.docs.map((doc, index) => {
+                    const data = doc.data();
+                    return {
+                        id: doc.id, // Assign an incremental ID for each listing
+                        title: data.PostName || 'Untitled Listing',
+                        description: data.PostCaption || 'No description available.',
+                        image: data.image || 'https://via.placeholder.com/300', // Default image if none provided
+                        rating: data.rating || 5, // Default rating
+                        distance: data.Location || 'Unknown location',
+                    };
+                });
+
+                setListings((prevListings) => [...prevListings, ...fetchedListings]); // Update state with fetched listings
+            } catch (error) {
+                console.error('Error fetching listings: ', error);
+            }
+        };
+
+        fetchListings();
+    }, []);
+
+    const deleteListing = async (id) => {
+        try{
+            const docRef = doc(db, 'userData', id);
+            await deleteDoc(docRef);
+            setListings((prevListings) => prevListings.filter((listing) => listing.id !== id));
+        }
+        catch(error){
+            console.error("Error deleting listing: ", error);
+        }
+    };
+
+    const toEditPage = (id) => {
+        navigate(`/edit-listing/${id}`);
+    };
+
+
     return (
         <div className="page-container">
             <div className="profile-container">
@@ -89,6 +169,18 @@ function Profile() {
                                                 </div>
                                             </div>
                                         </a>
+                                        <button
+                                            className='delete-button'
+                                            onClick={() => deleteListing(listing.id)}
+                                        >
+                                            Delete
+                                        </button>
+                                        <button
+                                            className='edit-button'
+                                            onClick={() => toEditPage(listing.id)}
+                                        >
+                                            Edit
+                                        </button>
                                     </li>
                                 ))}
                             </ul>
