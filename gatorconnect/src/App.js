@@ -13,6 +13,7 @@ import ListingDetail from './components/pages/ListingDetails';
 import Login from './components/pages/Login';
 import Messaging from './components/pages/Messaging';
 import ChangePass from './components/pages/ChangePass'
+import DisplayStripe from './components/pages/PaymentInfo'
 
 function App() {
     return (
@@ -32,6 +33,7 @@ function App() {
                     <Route path='/login' element={<Login />} />
                     <Route path='/messages' element={<Messaging />} />
                     <Route path='/changePassword' element={<ChangePass />}/>
+                    <Route path='/stripe' element = {<DisplayStripe />} />
                 </Routes>
                 </div>
             </Router>

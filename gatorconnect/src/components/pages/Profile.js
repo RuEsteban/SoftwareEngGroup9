@@ -10,10 +10,7 @@ function Profile() {
     const [isAuthenticaed, setIsAuthenticated] = useState(false);
     const auth = getAuth();
 
-    const username = "JohnDoe";
-    const email = "johndoe@example.com";
-    const profilePicture = "https://via.placeholder.com/150";
-
+   
 
     const handleChangePassword = () => {
         console.log('Navigating to Change Password...');
@@ -23,6 +20,8 @@ function Profile() {
 
     const handleSetupPayment = () => {
         console.log('Navigating to Payment Setup...');
+        navigate('/stripe');
+
     };
 
     const handleNavigateToMessaging = () => {
