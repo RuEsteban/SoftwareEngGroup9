@@ -156,9 +156,7 @@ function SignUp() {
                 <div className='form-group'>
                     <p>Already have an account? <span onClick={() => navigate('/login')} className='login-link'>Log In</span></p>
                 </div>
-                <div className='form-group'>
-                    <button onClick={tempLogout} type='submit' className='sign-up-button'>TEMP LOGOUT</button>
-                </div>
+                
             </form>
         </div>
     );

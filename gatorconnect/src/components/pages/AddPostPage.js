@@ -3,10 +3,10 @@ import '../../App.css';
 import './AddPost.css';
 import Footer from '../Footer';
 import axios from 'axios';
-import {collection, addDoc, getDocs, doc} from 'firebase/firestore'
+import {collection, addDoc, getDocs, doc, setDoc} from 'firebase/firestore'
 import {db} from './Firebase'
 import {listings} from './Services';
-
+import {getAuth} from 'firebase/auth'
 
 
 
@@ -25,14 +25,29 @@ const AddPostPage = () => {
     // const [file, setFile] = useState()
     // const [uploadedFileURL, setUploadedFileURL] = useState(null)
 
-    const dbref = collection(db, "userData")
+    const dbref = collection(db, "AllPosts")
 
     const send = async () =>
     {
+        const auth = getAuth();
+
         try
         {
-            await addDoc(dbref, {PostName:postName, PostCaption:postCaption, Cost:cost, Location:location, BusinessName: businessName, Email:email, Phone:phone})
+            const userPostDoc = doc(db, "AllPosts", auth.currentUser.uid);
+            setDoc(userPostDoc, {merge: true});
+            const userPostCollection = collection(userPostDoc, 'userPosts');
+            await addDoc(userPostCollection, {
+               PostName: postName,
+               PostCaption: postCaption, 
+               Cost: cost,
+               Location: location,
+               BusinessName: businessName,
+               Email: email,
+               Phone: phone
+                }  
+            );
             alert("Post Sent Successfully")
+
         }
         catch(error)
         {

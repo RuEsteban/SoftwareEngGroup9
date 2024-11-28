@@ -3,7 +3,6 @@ import { useBeforeUnload, useNavigate, useSearchParams } from 'react-router-dom'
 import './Profile.css';
 import Footer from '../Footer';
 import {getAuth, onAuthStateChanged} from 'firebase/auth';
-
 import {collection, addDoc, getDocs, doc, QuerySnapshot, deleteDoc} from 'firebase/firestore'
 import {db} from './Firebase'
 
@@ -14,6 +13,7 @@ function Profile() {
     const [user, setUser] = useState(null);
     const [isAuthenticaed, setIsAuthenticated] = useState(false);
     const auth = getAuth();
+    const [listings, setListings] = useState([]);
 
    
 
@@ -49,51 +49,15 @@ function Profile() {
         return () => unsubscribe();
     } ,[auth]);
 
-  
-    // Sample data for listings with rating and distance
-    const hardlistings = [
-        {
-            id: 1,
-            title: "Cozy Apartment in Downtown",
-            description: "A lovely 2-bedroom apartment with modern amenities.",
-            image: "https://via.placeholder.com/300",
-            rating: 4.5,
-            distance: "2 miles away"
-        },
-        {
-            id: 2,
-            title: "Beachside Villa",
-            description: "Enjoy ocean views and a private pool in this beautiful villa.",
-            image: "https://via.placeholder.com/300",
-            rating: 4.7,
-            distance: "5 miles away"
-        },
-        {
-            id: 3,
-            title: "Mountain Cabin",
-            description: "Perfect for a quiet retreat with stunning mountain views.",
-            image: "https://via.placeholder.com/300",
-            rating: 4.9,
-            distance: "20 miles away"
-        },
-        {
-            id: 4,
-            title: "City Loft",
-            description: "Stylish loft in the heart of the city, close to everything.",
-            image: "https://via.placeholder.com/300",
-            rating: 4.6,
-            distance: "1 mile away"
-        },
-    ];
 
-    // State to store listings
-    const [listings, setListings] = useState(hardlistings);
-
-    // Fetch Firestore data
     useEffect(() => {
+        const auth = getAuth();
         const fetchListings = async () => {
             try {
-                const querySnapshot = await getDocs(collection(db, 'userData')); 
+                const userDocument = doc(db, 'AllPosts', auth.currentUser.uid);
+                const userCollection = collection(userDocument, 'userPosts');
+                const querySnapshot = await getDocs(userCollection); 
+                
                 const fetchedListings = querySnapshot.docs.map((doc, index) => {
                     const data = doc.data();
                     return {
@@ -106,7 +70,7 @@ function Profile() {
                     };
                 });
 
-                setListings((prevListings) => [...prevListings, ...fetchedListings]); // Update state with fetched listings
+                setListings(fetchedListings); // Update state with fetched listings
             } catch (error) {
                 console.error('Error fetching listings: ', error);
             }
@@ -115,6 +79,7 @@ function Profile() {
         fetchListings();
     }, []);
 
+    
     const deleteListing = async (id) => {
         try{
             const docRef = doc(db, 'userData', id);
