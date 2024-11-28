@@ -257,33 +257,41 @@ const hardlistings = [
 
 const ListingDetail = () => {
     // State to store listings
-    const [listings, setListings] = useState(hardlistings);
+    const [listings, setListings] = useState([]);
 
-    // Fetch Firestore data
     useEffect(() => {
         const fetchListings = async () => {
             try {
-                const querySnapshot = await getDocs(collection(db, 'userData')); 
-                const fetchedListings = querySnapshot.docs.map((doc) => {
-                    const data = doc.data();
-                    return {
-                        id: doc.id, // Assign an incremental ID for each listing
-                        title: data.PostName || 'Untitled Listing',
-                        description: data.PostCaption || 'No description available.',
-                        image: data.image || 'https://via.placeholder.com/300', // Default image if none provided
-                        rating: data.rating || 5, // Default rating
-                        distance: data.Location || 'Unknown location',
-                    };
-                });
-
-                setListings((prevListings) => [...prevListings, ...fetchedListings]); // Update state with fetched listings
+                //const newFetchedListings = [];
+                const documentArray = await getDocs(collection(db, "AllPosts")); // make sure it iterates through every single document
+                documentArray.forEach(async (userDoc)  => {
+                    console.log("doc id", userDoc.id);
+                    const userDocument = doc(db, "AllPosts", userDoc.id);
+                    const userCollection = collection(userDocument, 'userPosts');
+                    console.log("u", userCollection.id);
+                    const querySnapshot = await getDocs(userCollection); 
+                    const fetchedListings = querySnapshot.docs.map((doc, index) => {
+                        console.log("doc name", doc.id);
+                        const data = doc.data();
+                        return {
+                            id: doc.id, // Assign an incremental ID for each listing
+                            title: data.PostName || 'Untitled Listing',
+                            description: data.PostCaption || 'No description available.',
+                            image: data.image || 'https://via.placeholder.com/300', // Default image if none provided
+                            rating: data.rating || 5, // Default rating
+                            distance: data.Location || 'Unknown location',
+                        };
+                        
+                    });
+                    setListings((prevListings) => [...prevListings, ...fetchedListings]); 
+                })
             } catch (error) {
                 console.error('Error fetching listings: ', error);
             }
         };
 
         fetchListings();
-    }, []); 
+    }, []);
 
 
     const { id } = useParams();
