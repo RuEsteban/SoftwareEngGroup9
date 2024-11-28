@@ -27,8 +27,9 @@ const AddPostPage = () => {
 
     const dbref = collection(db, "AllPosts")
 
-    const send = async () =>
+    const send = async (e) =>
     {
+        e.preventDefault();
         const auth = getAuth();
 
         try
@@ -55,27 +56,7 @@ const AddPostPage = () => {
         }
     }
 
-    // function handleChange(event) {
-    //     setFile(event.target.files[0])
-    // }
-    
-    // function handleSubmit(event) {
-    //     event.preventDefault()
-    //     const url = 'http://localhost:3000/add-post';
-    //     const formData = new FormData();
-    //     formData.append('file', file);
-    //     formData.append('fileName', file.name);
-    //     const config = {
-    //     headers: {
-    //         'content-type': 'multipart/form-data',
-    //         },
-    //     };
-    //     axios.post(url, formData, config).then((response) => {
-    //         setFile(event.target.files[0]);
-    //         //setUploadedFileURL(response/data/fileUrl);
-    //     });
-
-    // }
+   
 
 
     return (

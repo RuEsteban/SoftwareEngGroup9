@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc, collection } from 'firebase/firestore';
+import {getAuth, onAuthStateChanged} from 'firebase/auth';
+
 import { db } from './Firebase';
 import './EditListing.css';
 
@@ -20,9 +22,13 @@ function EditListing() {
 
     // Fetch listing data
     useEffect(() => {
+        const auth = getAuth();
         const fetchListing = async () => {
             try {
-                const docRef = doc(db, 'userData', id);
+                const userDocument = doc(db, 'AllPosts', auth.currentUser.uid);
+                const userCollection = collection(userDocument, 'userPosts');
+                const docRef =  doc(userCollection, id); 
+                
                 const docSnap = await getDoc(docRef);
 
                 if (docSnap.exists()) {
@@ -55,8 +61,12 @@ function EditListing() {
 
     // Save changes to Firestore
     const handleSave = async () => {
+        const auth = getAuth();
         try {
-            const docRef = doc(db, 'userData', id);
+            const userDocument = doc(db, 'AllPosts', auth.currentUser.uid);
+            const userCollection = collection(userDocument, 'userPosts');
+            const docRef =  doc(userCollection, id); 
+                
             await updateDoc(docRef, {
                 BusinessName: listing.BusinessName,
                 Cost: listing.Cost,

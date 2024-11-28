@@ -46,12 +46,14 @@ export const hardlistings = [
 ];
 
 const ListingsPage = () => {
+    
     // State to store listings
     const [listings, setListings] = useState([]);
 
     useEffect(() => {
         const auth = getAuth();
         const fetchListings = async () => {
+          
             try {
                 //const newFetchedListings = [];
                 const documentArray = await getDocs(collection(db, "AllPosts")); // make sure it iterates through every single document

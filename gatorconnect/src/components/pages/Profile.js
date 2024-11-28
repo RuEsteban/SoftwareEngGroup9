@@ -77,13 +77,17 @@ function Profile() {
         };
 
         fetchListings();
-    }, []);
+    }, [Profile]);
 
     
     const deleteListing = async (id) => {
         try{
-            const docRef = doc(db, 'userData', id);
-            await deleteDoc(docRef);
+            const auth = getAuth();
+            const userDocument = doc(db, "AllPosts", auth.currentUser.uid);
+            const userCollection = collection(userDocument, 'userPosts');
+            const userPost = doc(userCollection, id);
+            console.log(userPost.id);
+            await deleteDoc(userPost);
             setListings((prevListings) => prevListings.filter((listing) => listing.id !== id));
         }
         catch(error){
