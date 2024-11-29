@@ -3,6 +3,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import './PaymentForm.css'; // Import the CSS file
 import { Button } from '../Button';
+import Footer from '../Footer';
 
 const stripePromise = loadStripe('pk_test_51QPtVVFTT9Sko1HYSKBUrKYK4k1syDR7MA2iNQsGYQ4uqQreeV4OKJpRykl9LPO9AYCVxTdptwOud9T0D710STK4004vxj9aUm'); // Replace with your actual Stripe Publishable Key
 
@@ -88,9 +89,14 @@ function PaymentForm() {
 
 function DisplayStripe() {
     return (
-        <Elements stripe={stripePromise}>
-            <PaymentForm />
-        </Elements>
+        <>
+            <div className="center-container"> {/* Centering container */}
+                <Elements stripe={stripePromise}>
+                    <PaymentForm />
+                </Elements>
+            </div>
+            <Footer />
+        </>
     );
 }
 

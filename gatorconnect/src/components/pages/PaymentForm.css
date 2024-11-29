@@ -1,4 +1,22 @@
-/* General Page Styling */
+/* General Styling */
+body {
+    background-color: #f8f9fa; /* Light background for contrast */
+    font-family: Arial, sans-serif; /* Default font */
+    margin: 0;
+    padding: 0;
+}
+
+/* Centering Container */
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    background-color: #f8f9fa; /* Light gray background */
+    position: relative;
+    top: -150px; /* Move the card up slightly */
+}
+
 
 /* Container for Payment Form */
 .payment-form-container {
@@ -10,13 +28,13 @@
     text-align: center;
 }
 
-/* Heading Styles */
-.payment-form-container h1 {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #333333;
-}
+    /* Heading Styles */
+    .payment-form-container h1 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333333;
+    }
 
 /* Form Styles */
 
@@ -34,7 +52,6 @@
     font-size: 16px;
     color: #32325d;
     text-align: center;
-
 }
 
 /* Focus Styles for Card Element */
@@ -44,8 +61,6 @@
 }
 
 /* Submit Button Styles */
-
-
 button:disabled {
     background-color: #cccccc;
     cursor: not-allowed;
