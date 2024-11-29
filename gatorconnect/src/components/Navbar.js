@@ -59,6 +59,21 @@ function Navbar() {
         });
         return () => unsubscribe();
     }, [auth]);
+
+
+    const handleAddPost = () => {
+
+        console.log('Navigating to Payment Setup...');
+        const auth = getAuth();
+        if (auth.currentUser) {
+            navigate('/add-post');
+        } else {
+            navigate('/sign-up');
+        }
+
+    };
+
+
     return (
         <>
             <nav className='navbar'>
@@ -83,7 +98,7 @@ function Navbar() {
                             </Link>
                         </li>
                         <li className='nav-item'>
-                            <Link to='/products' className='nav-links' onClick={closeMobileMenu}>
+                            <Link to='/add-post' className='nav-links' onClick={handleAddPost}>
                                 Post
                             </Link>
                         </li>
