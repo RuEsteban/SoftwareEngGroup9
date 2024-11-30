@@ -1,0 +1,119 @@
+/* General Container Styling */
+.listing-detail-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 40px auto;
+    max-width: 800px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+/* Image Container */
+.image-container {
+    position: relative;
+    width: 100%;
+    max-height: 300px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .image-container img {
+        width: 100%;
+        object-fit: cover;
+    }
+
+/* Book Button */
+.book-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: #28a745;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .book-button:hover {
+        background-color: #218838;
+    }
+
+/* Listing Info Container */
+.listing-detail-info {
+    padding: 20px;
+    text-align: left;
+    width: 100%;
+}
+
+.listing-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Listing Title */
+.listing-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333333;
+    margin: 0;
+}
+
+.save-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    color: #0056b3;
+    outline: none; /* Remove blue highlight */
+    box-shadow: none; /* Remove the inner focus box */
+    transform: scale(1.5); /* Scale the bookmark by 1.5 times */
+}
+
+    .save-button:focus {
+        outline: none; /* Ensure no blue highlight on focus */
+        box-shadow: none; /* Remove any focus box */
+    }
+
+
+
+/* Listing Description */
+.listing-description {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555555;
+    margin: 10px 0;
+    margin-top: 20px; /* Adds space between the title and description */
+}
+
+/* Cost, Rating, Distance */
+.cost, .rating, .distance {
+    font-size: 16px;
+    color: #444444;
+    margin: 5px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .listing-detail-container {
+        margin: 20px;
+    }
+
+    .listing-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}

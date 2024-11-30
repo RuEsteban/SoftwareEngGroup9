@@ -105,7 +105,7 @@ function Profile() {
             <div className="profile-container">
                 <div className="profile-content">
                     <div className="profile-card">
-                        <img src={user?.photoURL} alt="Profile" className="profile-picture" />
+                        <img src={user?.photoURL || '/images/profileicon.PNG'} alt="Profile" className="profile-picture" />
                         <h2 className="username">{user?.displayName}</h2>
                         <p className="email">{user?.email}</p>
                         <div className="profile-buttons">

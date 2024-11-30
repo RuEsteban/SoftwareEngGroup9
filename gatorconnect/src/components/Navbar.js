@@ -121,12 +121,12 @@ function Navbar() {
                     )}
                     <Link to='/profile' className='profile-icon'>
                         <img
-                            src={user?.photoURL}
-                            alt='Profile'
+                            src={user?.photoURL || '/images/profileicon.PNG'} // Use fallback image if URL is unavailable
+                            alt='Profile icon' // Descriptive alt text
                             className='profile-icon-img'
                         />
                     </Link>
-                    
+
                 </div>
             </nav>
         </>

@@ -8,7 +8,7 @@ function HeroSection() {
   const navigate = useNavigate();
 
   const navProducts = () => {
-    navigate('/products');
+    navigate('/add-post');
 
 };
 const navServices = () => {
