@@ -5,8 +5,8 @@ import Footer from '../Footer';
 import axios from 'axios';
 import {collection, addDoc, getDocs, doc, setDoc} from 'firebase/firestore'
 import {db} from './Firebase'
-import {listings} from './Services';
 import {getAuth} from 'firebase/auth'
+import {listings} from './Services';
 
 
 

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./Messaging.css";
-import {doc, setDoc} from 'firebase/firestore';
+import {doc, setDoc, collection, addDoc, Timestamp} from 'firebase/firestore';
+import {getAuth, onAuthStateChanged} from 'firebase/auth';
+import {db} from './Firebase'
 
 const MessagingPage = () => {
     const [messages, setMessages] = useState([]);
@@ -9,11 +11,24 @@ const MessagingPage = () => {
 
     const users = ["Alice", "Bob", "Charlie"];
 
-    const handleSend = () => {
+
+    
+    const handleSend = async () => {
         if (input.trim()) {
-            setMessages([...messages, input.trim()]);
+            setMessages([input.trim()]);
             setInput("");
         }
+        const auth = getAuth();
+        const userDoc = doc(db, 'Messaging', auth.currentUser.uid);
+        setDoc(userDoc, {merge: true});
+        const userCollection = collection(userDoc, 'tempConvo');
+        await setDoc(doc(userCollection, Timestamp.fromDate(new Date)), {
+            reply: 'happy',
+            apple: messages,
+            date: Timestamp.fromDate(new Date),
+        }
+    )
+
     };
 
     const handleInputChange = (event) => {
