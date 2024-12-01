@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Messaging.css";
-import {doc, setDoc, collection, addDoc, Timestamp} from 'firebase/firestore';
+import {doc, setDoc, collection, getDoc, getDocs, Timestamp} from 'firebase/firestore';
 import {getAuth, onAuthStateChanged} from 'firebase/auth';
 import {db} from './Firebase'
 
@@ -8,26 +8,89 @@ const MessagingPage = () => {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState("");
     const [selectedUser, setSelectedUser] = useState(null);
+    const [users, setUsers] = useState([]);
+    const [userMap, setuserMap] = useState({});
+    //const [currentUser, setcurrentUser] = useState("");
 
-    const users = ["Alice", "Bob", "Charlie"];
+    useEffect(() => {
+        const auth = getAuth();
+        const userCollection = collection(db, 'Messaging');
+        const fetchMessages = async () => {
+            try {
+                const querySnapshot = await getDocs(userCollection);
+                const fetchedUsers = await Promise.all(
+                    querySnapshot.docs
+                    .filter((userDoc) => userDoc.id.includes(auth.currentUser.uid))
+                    .map(async (userDoc) => {
+                        
+                        const userID = auth.currentUser.uid;
+                        if(userDoc.id.includes(userID)){
+                            console.log("entered?")
+                            const docRef = doc(db, 'Messaging', userDoc.id);
+                            const messageCollection = collection(docRef, 'Messages');
+                            const temp = "IGNORE";
+                            const combined = temp + auth.currentUser.uid;
+                            const userDocRef = doc(messageCollection, combined);
+                            const docSnap = await getDoc(userDocRef);
+        
+                            if (docSnap.exists()) {
+                                const docNameData = docSnap.data();
+                                console.log("Document data:", docNameData.name, userDoc.id);
+                                return {name: docNameData.name, uid: userDoc.id}; // Collect the name
+                            } 
+                        }
+                       
+                    })
+                );
+               
 
-
+                const userDict = {};
+                fetchedUsers.forEach(({uid, name}) => {
+                    
+                    console.log(uid);
+                    userDict[name] = uid;
+                });
+                setuserMap(userDict);
+                setUsers(Object.keys(userDict));
+            
+               
+            } catch (error) {
+                console.error('Error fetching messages: ', error);
+            }
+        };
+    
+        fetchMessages();
+    }, []);
+    
     
     const handleSend = async () => {
         if (input.trim()) {
-            setMessages([input.trim()]);
+            //setMessages([input.trim()]);
             setInput("");
         }
-        const auth = getAuth();
-        const userDoc = doc(db, 'Messaging', auth.currentUser.uid);
-        setDoc(userDoc, {merge: true});
-        const userCollection = collection(userDoc, 'tempConvo');
-        await setDoc(doc(userCollection, Timestamp.fromDate(new Date)), {
-            reply: 'happy',
-            apple: messages,
-            date: Timestamp.fromDate(new Date),
+        console.log("Selected", userMap[selectedUser]);
+
+        try {
+            const auth = getAuth();
+           
+            const userDoc = doc(db, 'Messaging', userMap[selectedUser]);
+            //console.log("usermap", userMap[selectedUser]);
+            //setDoc(userDoc, {merge: true});
+            const userCollection = collection(userDoc, 'Messages');
+            //console.log("userCollection", userCollection.id);
+            const now = new Date();
+            const dateID = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}-${now.getHours()}-${now.getMinutes()}-${now.getSeconds()}`;
+            await setDoc(doc(userCollection, dateID), {
+                message: input.trim(),
+                user: auth.currentUser.uid,
+                //date: Timestamp.fromDate(new Date),
+            })
+            updateMessageUI(selectedUser);
+        }catch (error) {
+            console.log(error);
         }
-    )
+       
+    
 
     };
 
@@ -35,15 +98,46 @@ const MessagingPage = () => {
         setInput(event.target.value);
     };
 
-    const handleUserClick = (user) => {
+    const handleUserClick = async (user) => {
         setSelectedUser(user);
-        setMessages([]); // Reset messages for each user
+        //console.log("Current user data", user, userMap[user]);
+        updateMessageUI(user);
+       
     };
-
+    
+    const updateMessageUI = async (user) => {
+        const auth = getAuth();
+        setMessages([]);
+        try {
+            
+            const currentUser = collection(db, 'Messaging', userMap[user], 'Messages');
+            //const currentUser = collection(db, auth.currentUser.uid, userMap[user], 'Messages');
+            const messageArray = await getDocs(currentUser);
+            messageArray.forEach(async (userDoc) => {
+                if(!userDoc.id.includes("IGNORE")){
+                    const messageData = userDoc.data();
+                    const sender = messageData.user;
+                    if(sender === auth.currentUser.uid){
+                        setMessages((prevMessages) => [...prevMessages,{ message: messageData.message, type: "sent"}]);
+                        //console.log(messages);
+                    }else {
+                        setMessages((prevMessages) => [...prevMessages,{ message: messageData.message, type: "received"}]);
+                        //console.log(messages);
+    
+                    }
+                }
+            })
+        
+        }catch (error){
+            console.log(error);
+        }
+      
+    }
     return (
         <div className="messaging-page">
             <div className="user-list">
                 <h3>Users</h3>
+                <h3>{selectedUser}</h3>
                 {users.map((user) => (
                     <div
                         key={user}
@@ -59,9 +153,9 @@ const MessagingPage = () => {
                     {messages.map((msg, index) => (
                         <div
                             key={index}
-                            className={`message ${index % 2 === 0 ? "sent" : "received"}`}
+                            className={`message ${msg.type}`}
                         >
-                            {msg}
+                            {msg.message}
                         </div>
                     ))}
                 </div>
@@ -83,3 +177,14 @@ const MessagingPage = () => {
 };
 
 export default MessagingPage;
+
+
+/*
+{messages.map((msg, index) => (
+                        <div
+                            key={index}
+                            className={`message ${"sent" }`}
+                        >
+                            {msg}
+                        </div>
+                    ))}*/
