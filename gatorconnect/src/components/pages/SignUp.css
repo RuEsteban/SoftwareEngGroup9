@@ -52,3 +52,26 @@
     .sign-up-button:hover {
         background-color: #45a049;
     }
+
+    .google-sign-up {
+        width: 100%;
+        padding: 10px;
+        background-color: #1b0bfd; /* Adjust as needed */
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    .logout {
+        width: 100%;
+        padding: 10px;
+        background-color: #fd0b0b; /* Adjust as needed */
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }

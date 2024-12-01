@@ -1,0 +1,473 @@
+
+/* General Page Styling */
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: #f9f9f9;
+    padding-top: 0px; /* Adjust this value to match the height of your navbar */
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.profile-content {
+    flex: 0 0 300px;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    position: sticky;
+    top: 120px;
+    height: fit-content;
+}
+
+.profile-card {
+    text-align: center;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+.username {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.email {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.profile-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profile-button {
+    background-color: #1f98f4;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .profile-button:hover {
+        background-color: #006bb3;
+    }
+
+.listings-content {
+    flex: 1;
+    padding: 20px;
+}
+
+.cards__container {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    max-width: 1120px;
+    width: 100%;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cards__wrapper {
+    position: relative;
+    margin-top: 20px;
+}
+
+.cards__items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Creates three columns */
+    gap: 20px; /* Space between each card */
+    margin-bottom: 24px;
+}
+
+.cards__item {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 6px 20px rgba(56, 125, 255, 0.17);
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+}
+
+.cards__item__link {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-decoration: none;
+}
+
+.cards__item__pic-wrap {
+    position: relative;
+    width: 100%;
+    padding-top: 67%;
+    overflow: hidden;
+}
+
+    .cards__item__pic-wrap::after {
+        content: attr(data-category);
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 6px 8px;
+        max-width: calc(100% - 60px);
+        font-size: 12px;
+        font-weight: 700;
+        color: #fff;
+        background-color: #1f98f4;
+        box-sizing: border-box;
+        border-bottom-left-radius: 5px; /* Round the bottom left corner */
+    }
+
+.cards__item__img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.2s ease-in-out;
+}
+
+    .cards__item__img:hover {
+        transform: scale(1.05);
+    }
+
+.cards__item__info {
+    padding: 20px;
+}
+
+.cards__item__text {
+    font-size: 22px; /* Title font size */
+    color: #252e48;
+    margin-bottom: 10px;
+}
+
+.cards__item__details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Align items vertically centered */
+    font-size: 14px;
+    color: #555;
+    margin-top: 10px;
+}
+
+/* Hide the description */
+.cards__item__description {
+    display: none; /* Ensure description is not shown */
+}
+
+.cards__item__cost {
+    font-size: 14px;
+    color: #333;
+    display: flex;
+    align-items: center; /* Center dollar signs vertically */
+}
+
+    .cards__item__cost i {
+        margin-right: 2px; /* Add some space between dollar signs */
+        color: #1f98f4; /* Dollar signs color */
+    }
+
+.cards__item__rating {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #333;
+}
+
+    .cards__item__rating span {
+        color: gold; /* For the rating text */
+        font-weight: bold;
+    }
+
+.cards__item__distance {
+    font-size: 14px;
+    color: #666; /* Color for distance text */
+}
+
+.footer {
+    margin-top: auto;
+    padding: 10px;
+    background-color: #1f98f4;
+    color: white;
+    text-align: center;
+}
+
+.listing-title {
+    font-size: 4rem; /* Adjust size as needed */
+    font-weight: bold; /* Makes the title stand out */
+    margin-bottom: 10px; /* Space between the title and the next element */
+    color: #222; /* Darker color for better readability */
+}
+
+.listing-description {
+    margin-top: 10px; /* Space above the description */
+    font-size: 1.5rem; /* Font size for the description */
+    color: #333; /* Dark color for readability */
+    line-height: 1.5; /* Line height for better spacing */
+}
+
+
+
+.listing-detail {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+    .listing-detail img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 10px 10px 0 0; /* Rounded top corners */
+    }
+
+.listing-detail-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between elements */
+}
+
+.listing-detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.listing-detail h2 {
+    font-size: 2rem;
+    color: #333;
+    margin: 0;
+}
+
+.listing-detail-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between each detail */
+}
+
+.listing-detail-container {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: flex-start; /* Align items to the left */
+}
+
+.image-container {
+    position: relative; /* Allows absolute positioning for the button */
+}
+
+    .image-container img {
+        width: 100%; /* Ensure the image takes full width of the container */
+        height: auto; /* Keep the aspect ratio */
+    }
+
+.book-button {
+    background-color: #007bff; /* Blue background color */
+    color: white; /* White text color */
+    border: none; /* No border */
+    padding: 15px 30px; /* Larger padding for a bigger button */
+    font-size: 1.2rem; /* Larger font size */
+    font-weight: bold; /* Bold text */
+    cursor: pointer; /* Pointer cursor on hover */
+    position: absolute; /* Position the button relative to its parent */
+    bottom: 10px; /* Space from the bottom */
+    right: 10px; /* Space from the right */
+    border-radius: 5px; /* Rounded corners */
+    z-index: 10; /* Ensure the button is above other elements */
+}
+
+    .book-button:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+    }
+
+
+.cost {
+    font-size: 1rem; /* Slightly larger for emphasis */
+    font-weight: bold;
+    color: #333; /* Darker color for better readability */
+    margin-bottom: 5px; /* Adds space below the cost */
+}
+
+.rating {
+    font-size: 1rem; /* Keeps the rating slightly smaller */
+    color: #ffcc00; /* A yellowish color to represent stars */
+    margin-bottom: 5px;
+}
+
+.distance {
+    font-size: 1rem;
+    color: #666; /* Lighter gray to differentiate from cost */
+    margin-bottom: 5px;
+    font-style: italic; /* Gives a different style for emphasis */
+}
+
+
+@media (max-width: 768px) {
+    .listing-detail {
+        flex-direction: column; /* Stack image and content on small screens */
+        padding: 15px;
+    }
+
+        .listing-detail img {
+            width: 100%; /* Image takes full width on smaller screens */
+            margin-bottom: 15px; /* Add space between image and content when stacked */
+        }
+
+        .listing-detail h2 {
+            font-size: 1.5rem;
+        }
+}
+
+.filter-section {
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 40px;
+    margin-bottom: 20px;
+    margin-top: 0px;
+    display: flex;
+    gap: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky; /* Keeps it at the top while scrolling */
+    top: 60px; /* This should match the height of your navbar */
+    z-index: 100; /* Ensure it stays above other elements */
+}
+
+
+
+.filter-input,
+.filter-slider {
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease-in-out;
+}
+
+    .filter-input:focus,
+    .filter-slider:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+
+    }
+.filter-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 150px;
+    background: #e0e0e0;
+    border-radius: 5px;
+    height: 5px; /* Match the track height to the thumb's center */
+    outline: none;
+    transition: background 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+    .filter-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        background: #007bff;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background 0.3s ease-in-out;
+        margin-top: -1px; /* Adjust the margin to center the thumb vertically */
+    }
+
+    .filter-slider::-moz-range-thumb {
+        width: 16px;
+        height: 16px;
+        background: #007bff;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background 0.3s ease-in-out;
+    }
+
+.save-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+}
+
+    .save-button:hover {
+        background-color: #0056b3;
+    }
+
+    .save-button i {
+        font-size: 1.2rem;
+    }
+
+@media (max-width: 600px) {
+    .listing-detail {
+        padding: 15px;
+    }
+
+        .listing-detail h2 {
+            font-size: 1.5rem;
+        }
+
+    .listing-detail-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .save-button {
+        align-self: flex-start;
+    }
+}
+
+.image-container {
+    width: 100%;
+    height: 300px; /* Fixed height */
+    background-color: #000; /* Black background for bars */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Hide overflow to avoid showing excess image */
+}
+
+    .image-container img {
+        height: 300px; /* Force the image to have a height of 300px */
+        width: auto; /* Maintain the aspect ratio */
+        object-fit: cover; /* Scale the image to cover the container */
+    }
+

@@ -9,12 +9,16 @@ import SignUp from './components/pages/SignUp.js';
 import Team from './components/pages/Team.js';
 import Mission from './components/pages/Mission.js';
 import Profile from './components/pages/Profile.js';
+import AddPostPage from './components/pages/AddPostPage.js';
+import ListingDetail from './components/pages/ListingDetails';
+import DevMess from './components/pages/DevMess.js';
 
 function App() {
     return (
         <>
             <Router>
                 <Navbar />
+                <div className="page-container"> {/* Add this div to wrap content */}
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='/services' element={<Services />} />
@@ -23,7 +27,11 @@ function App() {
                     <Route path='/team' element={<Team />} />
                     <Route path='/mission' element={<Mission />} />
                     <Route path='/profile' element={<Profile />} />
-                </Routes>
+                    <Route path='/add-post' element= {<AddPostPage/>} />
+                    <Route path='/listing/:id' element={<ListingDetail />} />
+                    <Route path='/devMessaging/' element={<DevMess />}/>
+                    </Routes>
+                </div>
             </Router>
         </>
     );
