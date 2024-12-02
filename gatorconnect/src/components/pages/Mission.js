@@ -25,7 +25,7 @@ function Mission() {
                 </div>
             </div>
             <Footer />
-        </>
+        </> 
     );
 }
 
