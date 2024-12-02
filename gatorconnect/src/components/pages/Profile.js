@@ -1,6 +1,6 @@
 import { useBeforeUnload, useNavigate, useSearchParams } from 'react-router-dom';
 ﻿import React, {useState, useEffect} from 'react';
-import './Profile.css';
+import './Profile2.css';
 import Footer from '../Footer';
 import {getAuth, onAuthStateChanged} from 'firebase/auth';
 import {collection, addDoc, getDocs, doc, QuerySnapshot, deleteDoc} from 'firebase/firestore'
@@ -116,7 +116,6 @@ function Profile() {
                     </div>
                 </div>
                 <div className="listings-content">
-                    <h2>Your Listings</h2>
                     <div className="cards__container">
                         <div className="cards__wrapper">
                             <ul className="cards__items">
@@ -157,7 +156,7 @@ function Profile() {
                     </div>
                 </div>
             </div>
-            <Footer className="footer" />
+            <Footer />
         </div>
     );
 }

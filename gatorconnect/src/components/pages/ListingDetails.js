@@ -40,6 +40,7 @@ const ListingDetail = () => {
                             image: data.image || 'https://via.placeholder.com/300',
                             rating: data.rating || 5,
                             distance: data.Location || 'Unknown location',
+                            cost: data.cost || '1'
                         };
                        
                     });

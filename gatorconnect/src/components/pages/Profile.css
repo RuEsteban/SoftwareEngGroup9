@@ -25,62 +25,68 @@
 .profile-container {
     flex: 1;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 20px;
-    max-width: 1200px;
+    justify-content: center;
+    padding: 40px;
+    max-width: 800px;
     margin: 0 auto;
 }
 
-.profile-content {
-    flex: 0 0 300px;
-    padding: 20px;
-    background: #ffffff;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    position: sticky;
-    top: 120px;
-    height: fit-content;
-}
 
+.profile-content {
+    flex: 1;
+    padding: 40px;
+    background: #ffffff;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
 .profile-card {
     text-align: center;
 }
 
 .profile-picture {
-    width: 150px;
-    height: 150px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
     object-fit: cover;
+    border: 4px solid #1f98f4;
     margin-bottom: 20px;
 }
 
 .username {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: bold;
     color: #333;
+    margin-bottom: 10px;
 }
 
 .email {
-    font-size: 16px;
+    font-size: 18px;
     color: #666;
     margin-bottom: 20px;
 }
 
 .profile-buttons {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    flex-direction: row;
+    justify-content: center;
+    gap: 15px;
 }
 
 .profile-button {
     background-color: #1f98f4;
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 12px 24px;
+    border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s;
+    font-size: 16px;
+    font-weight: bold;
 }
 
     .profile-button:hover {
@@ -343,108 +349,120 @@
 }
 
 @media (max-width: 768px) {
-    .listing-detail {
-        flex-direction: column;
-        padding: 15px;
+    .profile-container {
+        padding: 20px;
     }
 
-        .listing-detail img {
-            width: 100%;
-            margin-bottom: 15px;
-        }
-
-        .listing-detail h2 {
-            font-size: 1.5rem;
-        }
-}
-
-.filter-section {
-    background: #f9f9f9;
-    border-radius: 8px;
-    padding: 40px;
-    margin-bottom: 20px;
-    margin-top: 0px;
-    display: flex;
-    gap: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 60px;
-    z-index: 100;
-}
-
-.filter-input,
-.filter-slider {
-    padding: 5px 10px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 14px;
-    outline: none;
-    transition: border-color 0.2s ease-in-out;
-}
-
-    .filter-input:focus,
-    .filter-slider:focus {
-        border-color: #007bff;
-        box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+    .profile-content {
+        padding: 20px;
     }
 
-.filter-slider {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 150px;
-    background: #e0e0e0;
-    border-radius: 5px;
-    height: 5px;
-    outline: none;
-    transition: background 0.3s ease-in-out;
-    cursor: pointer;
+    .profile-picture {
+        width: 140px;
+        height: 140px;
+    }
+
+    .username {
+        font-size: 24px;
+    }
+
+    .email {
+        font-size: 16px;
+    }
+
+    .profile-button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
 }
 
-    .filter-slider::-webkit-slider-thumb {
+    .filter-section {
+        background: #f9f9f9;
+        border-radius: 8px;
+        padding: 40px;
+        margin-bottom: 20px;
+        margin-top: 0px;
+        display: flex;
+        gap: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 60px;
+        z-index: 100;
+    }
+
+    .filter-input,
+    .filter-slider {
+        padding: 5px 10px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 14px;
+        outline: none;
+        transition: border-color 0.2s ease-in-out;
+    }
+
+        .filter-input:focus,
+        .filter-slider:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+        }
+
+    .filter-slider {
         -webkit-appearance: none;
         appearance: none;
-        width: 14px;
-        height: 14px;
-        background: #007bff;
-        border-radius: 50%;
+        width: 150px;
+        background: #e0e0e0;
+        border-radius: 5px;
+        height: 5px;
+        outline: none;
+        transition: background 0.3s ease-in-out;
         cursor: pointer;
     }
 
-    .filter-slider::-moz-range-thumb {
-        width: 14px;
-        height: 14px;
-        background: #007bff;
-        border-radius: 50%;
+        .filter-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 14px;
+            height: 14px;
+            background: #007bff;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .filter-slider::-moz-range-thumb {
+            width: 14px;
+            height: 14px;
+            background: #007bff;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+    .filter-button {
+        padding: 10px 20px;
+        background: #1f98f4;
+        color: white;
+        font-weight: bold;
+        border-radius: 6px;
+        border: none;
         cursor: pointer;
     }
 
-.filter-button {
-    padding: 10px 20px;
-    background: #1f98f4;
-    color: white;
-    font-weight: bold;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-}
+        .filter-button:hover {
+            background: #006bb3;
+        }
 
-    .filter-button:hover {
-        background: #006bb3;
+    .messaging-button {
+        margin-top: 20px;
+        padding: 12px 24px;
+        font-size: 16px;
+        color: #ffffff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        align-self: flex-end;
+        transition: background-color 0.3s;
     }
 
-.messaging-button {
-    margin-top: 20px;
-    padding: 12px 24px;
-    font-size: 16px;
-    color: #ffffff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    align-self: flex-end;
-    transition: background-color 0.3s;
-}
-
-    .messaging-button:hover {
-        background-color: #0056b3;
-    }
+        .messaging-button:hover {
+            background-color: #0056b3;
+        }

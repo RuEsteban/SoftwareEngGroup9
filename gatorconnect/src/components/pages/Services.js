@@ -88,39 +88,42 @@ const ListingsPage = () => {
     }, []);
 
     return (
-        <div className="listings-content">
-            <div className="cards__container">
-                <div className="cards__wrapper">
-                    <ul className="cards__items">
-                        {listings.map((listing) => (
-                            <li key={listing.id} className="cards__item">
-                                <Link className="cards__item__link" to={`/listing/${listing.id}`}>
-                                    <figure className="cards__item__pic-wrap" data-category={listing.title}>
-                                        <img
-                                            src={listing.image}
-                                            alt={listing.title}
-                                            className="cards__item__img"
-                                        />
-                                    </figure>
-                                    <div className="cards__item__info">
-                                        <h5 className="cards__item__text">{listing.description}</h5>
-                                        <div className="cards__item__details">
-                                            <div className="cards__item__distance">
-                                                <FontAwesomeIcon icon={faLocationDot} style={{ marginRight: '5px' }} />
-                                                {listing.distance}
-                                            </div>
-                                            <div className="cards__item__rating" style={{ textAlign: 'right' }}>
-                                                <span>⭐ {listing.rating}</span>
+        <>
+            <div className="listings-content">
+                <div className="cards__container">
+                    <div className="cards__wrapper">
+                        <ul className="cards__items">
+                            {listings.map((listing) => (
+                                <li key={listing.id} className="cards__item">
+                                    <Link className="cards__item__link" to={`/listing/${listing.id}`}>
+                                        <figure className="cards__item__pic-wrap" data-category={listing.title}>
+                                            <img
+                                                src={listing.image}
+                                                alt={listing.title}
+                                                className="cards__item__img"
+                                            />
+                                        </figure>
+                                        <div className="cards__item__info">
+                                            <h5 className="cards__item__text">{listing.description}</h5>
+                                            <div className="cards__item__details">
+                                                <div className="cards__item__distance">
+                                                    <FontAwesomeIcon icon={faLocationDot} style={{ marginRight: '5px' }} />
+                                                    {listing.distance}
+                                                </div>
+                                                <div className="cards__item__rating" style={{ textAlign: 'right' }}>
+                                                    <span>⭐ {listing.rating}</span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
+            <Footer />
+         </>
     );
 };
 
