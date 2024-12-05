@@ -37,10 +37,10 @@ const ListingDetail = () => {
                             id: doc.id,
                             title: data.PostName || 'Untitled Listing',
                             description: data.PostCaption || 'No description available.',
-                            image: data.image || 'https://via.placeholder.com/300',
+                            image: data.image || '/images/img-home.jpg',
                             rating: data.rating || 5,
                             distance: data.Location || 'Unknown location',
-                            cost: data.cost || '1'
+                            cost: data.Cost || '1'
                         };
                        
                     });
@@ -128,7 +128,7 @@ const ListingDetail = () => {
                     </button>
                 </div>
                 <p className="listing-description">{listing.description}</p>
-                <p className="cost">Cost: ${listing.cost || 'N/A'}</p>
+                <p className="cost">Cost: {listing.cost || 'N/A'}</p>
                 <p className="rating">Rating: ⭐ {listing.rating}</p>
                 <p className="distance">Location: {listing.distance}</p>
                 <button onClick={createMessaging}>Message</button>

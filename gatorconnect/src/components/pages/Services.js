@@ -14,7 +14,7 @@ export const hardlistings = [
         id: 1,
         title: "Cozy Apartment in Downtown",
         description: "A lovely 2-bedroom apartment with modern amenities.",
-        image: "https://via.placeholder.com/300",
+        image: "/images/img-home.jpg",
         rating: 4.5,
         distance: "2 miles away"
     },
@@ -71,7 +71,7 @@ const ListingsPage = () => {
                             id: doc.id, // Assign an incremental ID for each listing
                             title: data.PostName || 'Untitled Listing',
                             description: data.PostCaption || 'No description available.',
-                            image: data.image || 'https://via.placeholder.com/300', // Default image if none provided
+                            image: data.image || '/images/img-home.jpg', // Default image if none provided
                             rating: data.rating || 5, // Default rating
                             distance: data.Location || 'Unknown location',
                         };

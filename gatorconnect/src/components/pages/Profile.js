@@ -64,7 +64,7 @@ function Profile() {
                         id: doc.id, // Assign an incremental ID for each listing
                         title: data.PostName || 'Untitled Listing',
                         description: data.PostCaption || 'No description available.',
-                        image: data.image || 'https://via.placeholder.com/300', // Default image if none provided
+                        image: data.image || '/images/img-home.jpg', // Default image if none provided
                         rating: data.rating || 5, // Default rating
                         distance: data.Location || 'Unknown location',
                     };
