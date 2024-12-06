@@ -1,0 +1,151 @@
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.profile-content {
+    margin-bottom: 20px;
+}
+
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.profile-picture {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.username {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.email {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.profile-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.profile-button {
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .profile-button:hover {
+        background-color: #0056b3;
+    }
+
+/* Listings content */
+.listings-content {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.cards__container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cards__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.cards__item {
+    flex: 1 1 calc(48% - 20px);
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.cards__item__link {
+    text-decoration: none;
+}
+
+.cards__item__pic-wrap {
+    position: relative;
+    overflow: hidden;
+}
+
+    .cards__item__pic-wrap img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+.cards__item__info {
+    padding: 15px;
+}
+
+.cards__item__text {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.cards__item__details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #555;
+}
+
+.delete-button, .edit-button {
+    padding: 10px;
+    margin: 10px;
+    font-size: 14px;
+    background-color: #DC3545;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .delete-button:hover {
+        background-color: #a71d2a;
+    }
+
+.edit-button {
+    background-color: #28a745;
+}
+
+    .edit-button:hover {
+        background-color: #1e7e34;
+    }

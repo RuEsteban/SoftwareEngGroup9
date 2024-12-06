@@ -1,0 +1,85 @@
+.messaging-page {
+    display: flex;
+    height: 100vh;
+}
+
+.user-list {
+    width: 20%;
+    background-color: #f1f1f1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.user-item {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .user-item.active,
+    .user-item:hover {
+        background-color: #e0e0e0;
+    }
+
+.chat-container {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.message-container {
+    flex: 1;
+    max-height: 60vh;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.message {
+    padding: 8px;
+    margin: 5px 0;
+    border-radius: 10px;
+    max-width: 70%;
+}
+
+.sent {
+    background-color: #007bff;
+    color: white;
+    align-self: flex-end;
+    text-align: right;
+}
+
+.received {
+    background-color: #e1e1e1;
+    align-self: flex-start;
+}
+
+.input-container {
+    display: flex;
+}
+
+.message-input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.send-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .send-button:hover {
+        background-color: #0056b3;
+    }
