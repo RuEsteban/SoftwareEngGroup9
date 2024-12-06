@@ -1,7 +1,7 @@
 ﻿import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../Footer';
-import './Profile.css'; // Import the CSS for styling
+import './Profile.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import {getAuth, onAuthStateChanged} from 'firebase/auth';
@@ -43,12 +43,10 @@ export const hardlistings = [
         distance: "1 mile away"
     },
 
-    // Add more listings as needed
 ];
 
 const ListingsPage = () => {
     
-    // State to store listings
     const [listings, setListings] = useState([]);
 
     useEffect(() => {
@@ -56,8 +54,7 @@ const ListingsPage = () => {
         const fetchListings = async () => {
           
             try {
-                //const newFetchedListings = [];
-                const documentArray = await getDocs(collection(db, "AllPosts")); // make sure it iterates through every single document
+                const documentArray = await getDocs(collection(db, "AllPosts")); 
                 documentArray.forEach(async (userDoc)  => {
                     console.log("doc id", userDoc.id);
                     const userDocument = doc(db, "AllPosts", userDoc.id);
@@ -68,11 +65,11 @@ const ListingsPage = () => {
                         console.log("doc name", doc.id);
                         const data = doc.data();
                         return {
-                            id: doc.id, // Assign an incremental ID for each listing
+                            id: doc.id, 
                             title: data.PostName || 'Untitled Listing',
                             description: data.PostCaption || 'No description available.',
-                            image: data.image || '/images/img-home.jpg', // Default image if none provided
-                            rating: data.rating || 5, // Default rating
+                            image: data.image || '/images/img-home.jpg', 
+                            rating: data.rating || 5,
                             distance: data.Location || 'Unknown location',
                         };
                         

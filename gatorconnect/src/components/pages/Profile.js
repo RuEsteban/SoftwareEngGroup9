@@ -61,11 +61,11 @@ function Profile() {
                 const fetchedListings = querySnapshot.docs.map((doc, index) => {
                     const data = doc.data();
                     return {
-                        id: doc.id, // Assign an incremental ID for each listing
+                        id: doc.id, 
                         title: data.PostName || 'Untitled Listing',
                         description: data.PostCaption || 'No description available.',
-                        image: data.image || '/images/img-home.jpg', // Default image if none provided
-                        rating: data.rating || 5, // Default rating
+                        image: data.image || '/images/img-home.jpg',
+                        rating: data.rating || 5, 
                         distance: data.Location || 'Unknown location',
                     };
                 });

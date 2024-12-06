@@ -1,24 +1,23 @@
-/* General Styling */
+
 body {
-    background-color: #f8f9fa; /* Light background for contrast */
-    font-family: Arial, sans-serif; /* Default font */
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
-/* Centering Container */
+
 .center-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Full viewport height */
-    background-color: #f8f9fa; /* Light gray background */
+    height: 100vh; 
+    background-color: #f8f9fa;
     position: relative;
-    top: -150px; /* Move the card up slightly */
+    top: -150px;
 }
 
 
-/* Container for Payment Form */
 .payment-form-container {
     background: #ffffff;
     border-radius: 8px;
@@ -28,7 +27,6 @@ body {
     text-align: center;
 }
 
-    /* Heading Styles */
     .payment-form-container h1 {
         font-size: 24px;
         font-weight: bold;
@@ -36,9 +34,6 @@ body {
         color: #333333;
     }
 
-/* Form Styles */
-
-/* Card Element Styling */
 .StripeElement {
     box-sizing: border-box;
     width: 100%;
@@ -54,13 +49,11 @@ body {
     text-align: center;
 }
 
-/* Focus Styles for Card Element */
 .StripeElement--focus {
     border-color: #007bff;
     box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
 }
 
-/* Submit Button Styles */
 button:disabled {
     background-color: #cccccc;
     cursor: not-allowed;
@@ -70,14 +63,12 @@ button:hover:not(:disabled) {
     background-color: #0056b3;
 }
 
-/* Error Message Styling */
 .payment-error {
     color: #ff0000;
     font-size: 14px;
     margin-bottom: 15px;
 }
 
-/* Success Message Styling */
 .payment-success {
     color: #28a745;
     font-size: 14px;

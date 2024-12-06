@@ -25,9 +25,6 @@ function Products() {
          <>
              <div>
                 <button style={{
-                    // display: 'flex',
-                    // justifyContent: 'center',
-                    // alignItems: 'center',
                     padding: '10px 20px',
                     border: 'none',
                     borderRadius: '5px',

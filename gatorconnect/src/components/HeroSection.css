@@ -1,4 +1,3 @@
-/* Hero Section Background Image */
 .hero-container {
     height: 100vh;
     width: 100%;
@@ -7,46 +6,40 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-image: url('../../public/images/home.jpg'); /* Replace with the path to your image */
+    background-image: url('../../public/images/home.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
 }
 
-    /* Heading Styles */
     .hero-container > h1 {
         color: #fff;
         font-size: 100px;
         margin-top: -100px;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Optional: shadow for better readability */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
     }
 
-    /* Paragraph Styles */
     .hero-container > p {
         margin-top: 8px;
         color: #fff;
         font-size: 32px;
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Optional: shadow for better readability */
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); 
     }
 
-/* Button Container */
 .hero-btns {
     margin-top: 32px;
 }
 
-    /* Buttons */
     .hero-btns .btn {
         margin: 6px;
     }
 
-/* FontAwesome Icon */
 .fa-play-circle {
     margin-left: 4px;
 }
 
-/* Responsive Styles for Small Screens */
 @media screen and (max-width: 960px) {
     .hero-container > h1 {
         font-size: 70px;

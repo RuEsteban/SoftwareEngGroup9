@@ -10,7 +10,6 @@ const MessagingPage = () => {
     const [selectedUser, setSelectedUser] = useState(null);
     const [users, setUsers] = useState([]);
     const [userMap, setuserMap] = useState({});
-    //const [currentUser, setcurrentUser] = useState("");
 
     useEffect(() => {
         const auth = getAuth();
@@ -65,7 +64,6 @@ const MessagingPage = () => {
     
     const handleSend = async () => {
         if (input.trim()) {
-            //setMessages([input.trim()]);
             setInput("");
         }
         console.log("Selected", userMap[selectedUser]);
@@ -74,16 +72,13 @@ const MessagingPage = () => {
             const auth = getAuth();
            
             const userDoc = doc(db, 'Messaging', userMap[selectedUser]);
-            //console.log("usermap", userMap[selectedUser]);
-            //setDoc(userDoc, {merge: true});
+ 
             const userCollection = collection(userDoc, 'Messages');
-            //console.log("userCollection", userCollection.id);
             const now = new Date();
             const dateID = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}-${now.getHours()}-${now.getMinutes()}-${now.getSeconds()}`;
             await setDoc(doc(userCollection, dateID), {
                 message: input.trim(),
                 user: auth.currentUser.uid,
-                //date: Timestamp.fromDate(new Date),
             })
             updateMessageUI(selectedUser);
         }catch (error) {
@@ -100,7 +95,6 @@ const MessagingPage = () => {
 
     const handleUserClick = async (user) => {
         setSelectedUser(user);
-        //console.log("Current user data", user, userMap[user]);
         updateMessageUI(user);
        
     };
@@ -111,7 +105,6 @@ const MessagingPage = () => {
         try {
             
             const currentUser = collection(db, 'Messaging', userMap[user], 'Messages');
-            //const currentUser = collection(db, auth.currentUser.uid, userMap[user], 'Messages');
             const messageArray = await getDocs(currentUser);
             messageArray.forEach(async (userDoc) => {
                 if(!userDoc.id.includes("IGNORE")){
@@ -119,11 +112,8 @@ const MessagingPage = () => {
                     const sender = messageData.user;
                     if(sender === auth.currentUser.uid){
                         setMessages((prevMessages) => [...prevMessages,{ message: messageData.message, type: "sent"}]);
-                        //console.log(messages);
                     }else {
-                        setMessages((prevMessages) => [...prevMessages,{ message: messageData.message, type: "received"}]);
-                        //console.log(messages);
-    
+                        setMessages((prevMessages) => [...prevMessages,{ message: messageData.message, type: "received"}]);    
                     }
                 }
             })
@@ -177,14 +167,3 @@ const MessagingPage = () => {
 };
 
 export default MessagingPage;
-
-
-/*
-{messages.map((msg, index) => (
-                        <div
-                            key={index}
-                            className={`message ${"sent" }`}
-                        >
-                            {msg}
-                        </div>
-                    ))}*/

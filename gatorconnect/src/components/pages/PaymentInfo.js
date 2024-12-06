@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import './PaymentForm.css'; // Import the CSS file
+import './PaymentForm.css';
 import { Button } from '../Button';
 import Footer from '../Footer';
 
@@ -31,7 +31,7 @@ function PaymentForm() {
         let clientSecret = '';
 
         try {
-            const response = await fetch('http://localhost:3001/create-payment-intent', { // Update the URL if needed
+            const response = await fetch('http://localhost:3001/create-payment-intent', { 
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ amount: amountInCents, currency: 'usd' }),

@@ -1,6 +1,6 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import './ListingDetails.css'; // Import the CSS for styling
+import './ListingDetails.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookmark as solidBookmark } from '@fortawesome/free-solid-svg-icons';
 import { faBookmark as regularBookmark } from '@fortawesome/free-regular-svg-icons';
@@ -60,7 +60,6 @@ const ListingDetail = () => {
         console.log("use effect", posterID);
     }, [posterID]);
 
-    //const { id } = useParams();
     const listing = listings.find((listing) => listing.id === id);
 
     if (!listing) {

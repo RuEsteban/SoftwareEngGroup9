@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../App.css';
 import Footer from '../Footer';
-import './Team.css'; // Ensure you create and style this CSS file for the team page
+import './Team.css';
 
 function Team() {
     const teamMembers = [
@@ -9,21 +9,20 @@ function Team() {
             name: 'Ru E',
             role: '',
             bio: '',
-            image: 'path-to-alice-image.jpg',
+            image: '-image.jpg',
         },
         {
             name: 'Bernard K',
             role: '',
             bio: '',
-            image: 'path-to-bob-image.jpg',
+            image: '-image.jpg',
         },
         {
             name: 'Erick G',
             role: '',
             bio: '',
-            image: 'path-to-carol-image.jpg',
+            image: '-image.jpg',
         },
-        // Add more team members here
     ];
 
     return (

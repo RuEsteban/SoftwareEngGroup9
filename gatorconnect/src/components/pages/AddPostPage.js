@@ -22,9 +22,6 @@ const AddPostPage = () => {
 
     //https://www.filestack.com/fileschool/react/react-file-upload/
 
-    // const [file, setFile] = useState()
-    // const [uploadedFileURL, setUploadedFileURL] = useState(null)
-
     const dbref = collection(db, "AllPosts")
 
     const send = async (e) =>
@@ -192,12 +189,6 @@ const AddPostPage = () => {
                                 onChange={(e) => setPhone(e.target.value)}
                             />
                         </div>
-                        {/* <form className='space'onSubmit={handleSubmit}>
-                            <h1 className='title'>Upload File</h1>
-                            <input type='file' onChange={handleChange}/>
-                            <button type='submit'>Upload</button>
-                        </form>
-                        {uploadedFileURL && <img src={uploadedFileURL} alt="Uploaded content"/>} */}
                         <div>
                             <button
                                 className='post-button'
